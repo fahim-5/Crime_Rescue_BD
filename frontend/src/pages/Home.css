@@ -1,0 +1,85 @@
+/* Home Container */
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+}
+
+/* Welcome Section */
+.welcome-section {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 850px;
+    margin: 120px auto;
+    color: #333;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Welcome Heading */
+.welcome-heading {
+    font-size: 3.2em;
+    color: #e74c3c;  /* Crime theme color */
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* Welcome Text */
+.welcome-text {
+    font-size: 1.3em;
+    color: #555;
+    margin-bottom: 30px;
+    line-height: 1.7;
+    font-weight: 300;
+}
+
+/* Call to Action Text */
+.cta-text {
+    font-size: 1.2em;
+    color: #333;
+}
+
+.cta-link {
+    color: #e74c3c;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.cta-link:hover {
+    color: #c0392b;
+    text-decoration: underline;
+}
+
+/* Report Button */
+.report-button {
+    background: linear-gradient(145deg, #6f2d2d, #c0392b);
+    color: white;
+    padding: 18px 36px;
+    font-size: 1.3em;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 30px;
+}
+
+.report-button:hover {
+    background: linear-gradient(145deg, #c0392b, #e74c3c);
+    transform: scale(1.05);
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.report-button:active {
+    transform: scale(1.03);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}

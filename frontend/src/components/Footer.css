@@ -1,0 +1,106 @@
+/* Footer Styling */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 10px;
+    font-size: 0.85rem;
+    text-align: center;
+    margin-top: 20px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.footer-section {
+    flex: 1;
+    padding: 10px;
+    margin: 5px;
+}
+
+.footer-section h2 {
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #e91e63; /* Highlight heading */
+}
+
+.footer-section p,
+.footer-section ul {
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.footer-section a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: #e91e63;
+}
+
+.footer-section ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.footer-section ul li {
+    margin: 4px 0;
+}
+
+.footer-section .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 8px;
+}
+
+.footer-section .social-icon {
+    display: inline-block;
+}
+
+.footer-section .social-icon i {
+    font-size: 24px;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.footer-section .social-icon i:hover {
+    transform: scale(1.1);
+    color: #e91e63; /* Change color on hover */
+}
+
+/* Footer bottom (small text section) */
+.footer-bottom {
+    border-top: 1px solid #444;
+    padding: 5px 0;
+    font-size: 0.75em;
+    color: #bbb;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-section {
+        padding: 8px;
+    }
+
+    .footer-section h2 {
+        font-size: 1em;
+    }
+
+    .footer-section .social-icons {
+        gap: 10px;
+    }
+}

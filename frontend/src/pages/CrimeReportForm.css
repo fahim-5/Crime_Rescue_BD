@@ -1,0 +1,152 @@
+/* ========================= */
+/* Elegant Report Form Styling */
+/* ========================= */
+
+/* Apply a Google Font for a clean and modern look */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* Main content should take up all available space */
+.main-container {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif; /* Modern Font */
+    margin-top: 300px;
+}
+
+
+
+
+/* Report Form */
+.report-form {
+    max-width: 700px;
+    margin: 100px 450px;
+    margin-top: 115px;
+    padding: 35px;
+    background-color: #fff;
+    border-radius: 12px;
+    border-left: 6px solid #ff4757; /* Red border */
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Heading */
+.report-form h2 {
+    font-size: 2.2em;
+    text-align: center;
+    color: #ff4757; /* Red color for the heading */
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Form Group */
+.report-form .form-group {
+    margin-bottom: 25px;
+}
+
+/* Labels */
+.report-form label {
+    display: block;
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #333; /* Dark grey for a neutral, easy-to-read tone */
+    margin-bottom: 8px;
+    margin-top: 6px;
+    font-weight: 700;
+}
+
+/* Input Fields */
+.report-form input[type="text"],
+.report-form input[type="datetime-local"],
+.report-form select,
+.report-form input[type="number"],
+.report-form textarea {
+    width: 100%;
+    padding: 12px 18px;
+    border: 2px solid #ff4757; /* Red border */
+    border-radius: 8px;
+    font-size: 1.1em;
+    background: #f4f7f6; /* Light grey background for input fields */
+    color: #333;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+/* Focus Effect */
+.report-form input:focus,
+.report-form select:focus,
+.report-form textarea:focus {
+    border-color: #ff6b81; /* Lighter red on focus */
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 71, 87, 0.5); /* Slight red glow */
+}
+
+/* Textarea */
+.report-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Radio Button Group */
+.report-form .radio-group {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.report-form .radio-group label {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Submit Button */
+.report-form button[type="submit"] {
+    background: #ff4757; /* Red button */
+    color: white;
+    font-size: 1.3em;
+    font-weight: 600;
+    padding: 15px;
+    width: 100%;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.report-form button[type="submit"]:hover {
+    background: #ff6b81; /* Lighter red on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.report-form button[type="submit"]:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+    .report-form {
+        width: 90%;
+        padding: 30px;
+    }
+
+    .report-form h2 {
+        font-size: 1.8em;
+    }
+
+    .report-form input[type="text"],
+    .report-form input[type="datetime-local"],
+    .report-form select,
+    .report-form input[type="number"],
+    .report-form textarea {
+        font-size: 1em;
+    }
+}

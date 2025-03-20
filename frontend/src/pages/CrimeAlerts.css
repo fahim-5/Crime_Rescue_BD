@@ -1,0 +1,263 @@
+/* notifications-container */
+.notifications-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: left;
+    min-height: 100vh;
+    margin-top: 105px;
+    
+}
+
+/* Page heading */
+.notifications-container h1 {
+    text-align: center;
+    font-size: 2em;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+/* Individual notification box */
+.notification {
+    background-color: #ffffff;
+    border-left: 5px solid #e74c3c;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    position: relative; /* For button positioning */
+}
+
+/* Notification text */
+.notification p {
+    font-size: 1.1em;
+    color: #333;
+    margin: 0;
+}
+
+/* Timestamp */
+.timestamp {
+    display: block;
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 5px;
+}
+
+/* Button styles */
+.details-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 12px 25px;
+    background-color: #007bff; /* Default background */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Default shadow */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+/* Hover Effect */
+.details-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-3px); /* Lift the button for a 3D effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+/* Active (Click) Effect */
+.details-btn:active {
+    transform: translateY(1px); /* Pressed effect */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Lighter shadow when clicked */
+}
+
+/* Focus Effect (Accessibility) */
+.details-btn:focus {
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 5px rgba(6, 11, 15, 0.8); /* Light blue glow on focus */
+}
+
+/* Dynamic Background using CSS Variables */
+:root {
+    --btn-default-bg: #007bff;
+    --btn-hover-bg: #0056b3;
+    --btn-focus-glow: rgba(0, 123, 255, 0.8);
+}
+
+/* Responsive Styling (Optional) */
+@media (max-width: 600px) {
+    .details-btn {
+        padding: 8px 15px; /* Adjust padding for small screens */
+        font-size: 0.9em; /* Slightly smaller text */
+    }
+}
+
+/* Hover on Notification */
+.notification:hover .details-btn {
+    background-color: #ff7f50; /* Change button color when notification is hovered */
+    transform: translateY(-5px); /* Enhance hover effect on button */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deeper shadow when hovering notification */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Basic pop-up styling */
+
+
+/* Crime Details Pop-up */
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Darkened background */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Show the pop-up when the 'active' class is added */
+.popup.active {
+    display: flex;
+}
+
+/* Pop-up content container */
+.popup-content {
+    background: #f8f9fa; /* Light background */
+    width: 60%; /* Wider for readability */
+    max-width: 700px;
+    padding: 30px;
+    border-radius: 15px;
+    border: 3px solid #444; /* Bold border */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    text-align: left;
+}
+
+/* Each section inside the pop-up */
+.popup-content p {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    font-size: 1.2em;
+}
+
+/* Background colors for different sections */
+.popup-content p:nth-child(odd) {
+    background: #ffeded; /* Light red for contrast */
+}
+
+.popup-content p:nth-child(even) {
+    background: #e7f7e7; /* Light green for readability */
+}
+
+/* Close button style */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+    background: red;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.3s ease;
+}
+
+.close-btn:hover {
+    background: darkred;
+}
+
+
+/* General Styles */
+.notifications-container {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Notification Box */
+.notification {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 10px auto;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Details Button */
+.details-btn {
+    background-color: #e94560;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.details-btn:hover {
+    background-color: #ff4757;
+}
+
+/* Popup Styling */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Popup Content */
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Close Button */
+.close-btn {
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+

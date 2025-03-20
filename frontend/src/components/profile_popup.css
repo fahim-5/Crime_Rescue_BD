@@ -1,0 +1,200 @@
+/* ================= Profile Popup - Elegant Glassmorphism ================= */
+.profile-popup {
+    position: fixed;
+    top: 30.5%;
+    left: 86%;
+    transform: translate(-50%, -50%);
+    background: rgba(30, 30, 30, 0.8); /* Semi-transparent dark background */
+    padding: 25px;
+    width: 340px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); /* Deep, elegant shadow */
+    z-index: 1050;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+}
+
+/* Title */
+.profile-popup h2 {
+    font-size: 1.8rem;
+    color: #f8f8f8;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Profile Header */
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.profile-header .rank {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(135deg, #ff8a00, #e52e71);
+    padding: 5px 10px;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(255, 138, 0, 0.4);
+}
+
+/* Profile Details */
+.profile-popup p {
+    font-size: 1rem;
+    margin: 8px 0;
+    color: #e0e0e0;
+}
+
+.profile-popup p strong {
+    color: #ffba08;
+}
+
+/* Logout Button - Stylish */
+.logout-btn {
+    padding: 12px;
+    background: linear-gradient(135deg, #d4145a, #fbb03b);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    width: 100%;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    font-weight: bold;
+}
+
+.logout-btn:hover {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    transform: scale(1.05);
+}
+
+/* Profile Button (Fahim's Username Button) */
+.profile-btn {
+    background: linear-gradient(135deg, #4a90e2, #9013fe);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 7px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    border: none;
+}
+
+.profile-btn:hover {
+    background: linear-gradient(135deg, #5c6bc0, #ab47bc);
+    transform: scale(1.05);
+}
+
+/* Background Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+}
+
+/* Smooth Pop-up Animation */
+@keyframes fadeInPopup {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -55%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.profile-popup {
+    animation: fadeInPopup 0.3s ease-in-out;
+}
+
+
+/* =================== Custom Alert Box - Elegant & Modern =================== */
+.custom-alert {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #e94560, #ff758c);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 20px 30px;
+    width: 350px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(233, 69, 96, 0.4);
+    z-index: 9999; /* Ensures it's always on top */
+    display: none; /* Hidden by default */
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Alert Box - Show Effect */
+.custom-alert.show {
+    display: block;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+/* Different Alert Types */
+.alert-success {
+    background: linear-gradient(135deg, #28a745, #34d058);
+    box-shadow: 0 10px 30px rgba(40, 167, 69, 0.4);
+}
+
+.alert-error {
+    background: linear-gradient(135deg, #d32f2f, #ff5252);
+    box-shadow: 0 10px 30px rgba(211, 47, 47, 0.4);
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, #ff9800, #ffb74d);
+    box-shadow: 0 10px 30px rgba(255, 152, 0, 0.4);
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #b81045, #64b5f6);
+    box-shadow: 0 10px 30px rgba(149, 21, 21, 0.4);
+}
+
+/* Dismiss Button */
+.alert-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: white;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.alert-close:hover {
+    color: #fff;
+    transform: scale(1.2);
+}
+
+/* Smooth Pop-up Animation */
+@keyframes fadeInAlert {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -55%) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.custom-alert {
+    animation: fadeInAlert 0.3s ease-in-out;
+}
