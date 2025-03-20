@@ -6,5 +6,8 @@ import App from './App.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />
+
+              {/* hello fahim faysal.  how aw re uyou   */}
+
   </StrictMode>,
 )
