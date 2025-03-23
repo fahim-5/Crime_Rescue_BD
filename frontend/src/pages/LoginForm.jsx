@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../context/useAuth"; // Assuming the context exists
 import "./LoginForm.css"; // Ensure isolated styling
 
 const LoginForm = () => {
+  const { login } = useAuth(); // Extract login function from context to set user in state
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -33,8 +35,14 @@ const LoginForm = () => {
       );
 
       if (response.status === 200) {
+        const userData = response.data.user; // Assuming user data is returned
+        const token = response.data.token; // Assuming token is returned
+
+        // Save the user token and user data to context (for managing auth state globally)
+        login({ token, ...userData });
+
         setSuccess("Login successful! Redirecting...");
-        setTimeout(() => navigate("/"), 2000);
+        setTimeout(() => navigate("/home"), 2000); // Redirect after successful login
       }
     } catch (err) {
       setError(err.response?.data?.message || "Invalid email or password.");
@@ -88,7 +96,7 @@ const LoginForm = () => {
 
         <p className="auth-footer">
           Don't have an account?{" "}
-          <a href="/signup" className="auth-link">Sign Up</a>
+          <a href="/" className="auth-link">Sign Up</a>
         </p>
       </section>
     </main>

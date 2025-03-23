@@ -1,11 +1,16 @@
+                        user schema
+---------------------------------------------------------------------------
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(255) NOT NULL,
     username VARCHAR(100) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL UNIQUE,
     national_id VARCHAR(50) NOT NULL UNIQUE,
-    passport VARCHAR(50) NULL,
+    passport VARCHAR(50) NULL UNIQUE,
+    mobile_no VARCHAR(20) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    role ENUM('Public', 'Police', 'Admin') NOT NULL,
+    role ENUM('Public', 'Police', 'Admin') NOT NULL DEFAULT 'Public',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+

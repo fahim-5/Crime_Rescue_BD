@@ -9,12 +9,12 @@ const Navbar = () => {
   const navigate = useNavigate();
   const popupRef = useRef(null);
 
-  const userName = "Fahim"; // Dummy user name for logged-in state
+  // Fallback name when no user is logged in
+  const userName = "Guest"; 
 
   const toggleProfilePopup = () => {
     setProfileOpen((prev) => !prev);
   };
-
 
   function showAlert(message, type = "info") {
     const alertBox = document.createElement("div");
@@ -25,27 +25,20 @@ const Navbar = () => {
 
     // Close alert when clicked
     alertBox.querySelector(".alert-close").addEventListener("click", () => {
-        alertBox.style.opacity = "0";
-        setTimeout(() => alertBox.remove(), 400);
+      alertBox.style.opacity = "0";
+      setTimeout(() => alertBox.remove(), 400);
     });
 
     // Auto-remove after 3 seconds
     setTimeout(() => {
-        alertBox.style.opacity = "0";
-        setTimeout(() => alertBox.remove(), 400);
+      alertBox.style.opacity = "0";
+      setTimeout(() => alertBox.remove(), 400);
     }, 3000);
-}
-
-// Example Usage
-// showAlert("Success! Your item has been updated.", "success");
-// showAlert("Error! Something went wrong.", "error");
-// showAlert("Warning! This action cannot be undone.", "warning");
-// showAlert("Info: Your session will expire soon.", "info");
-
+  }
 
   const handleLogout = (event) => {
-    event.stopPropagation(); // Prevents event bubbling
-   showAlert("Logout succesful");
+    event.stopPropagation();
+    showAlert("Logout successful");
     setProfileOpen(false); // Close the popup
     navigate("/login"); // Redirect to login page
   };
@@ -76,7 +69,7 @@ const Navbar = () => {
 
         <nav>
           <ul className="nav-links">
-            <li><Link to="/">Home</Link></li>
+            <li><Link to="/home">Home</Link></li>
             <li><Link to="/report">Report</Link></li>
             <li><Link to="/notifications">Notifications</Link></li>
             <li><Link to="/alert">Alert</Link></li>
@@ -88,13 +81,11 @@ const Navbar = () => {
           {location.pathname === "/signup" ? (
             <Link to="/login" className="sign-up-btn">Sign In</Link>
           ) : location.pathname === "/login" ? (
-            <Link to="/signup" className="sign-up-btn">Sign Up</Link>
-          ) : userName ? (
-            <button onClick={toggleProfilePopup} className="profile-btn">
-              {userName}
-            </button>
+            <Link to="/" className="sign-up-btn">Sign Up</Link>
           ) : (
-            <Link to="/login" className="sign-up-btn">Sign In</Link>
+            <button onClick={toggleProfilePopup} className="profile-btn">
+              {userName} {/* Display the fallback user name */}
+            </button>
           )}
         </div>
       </div>
@@ -105,7 +96,7 @@ const Navbar = () => {
           <div className="overlay" onClick={() => setProfileOpen(false)}></div>
           <div className="profile-popup" ref={popupRef}>
             <div className="profile-header">
-              <h2>Fahim Faysal</h2>
+              <h2>{userName}</h2>
               <span className="rank">Gold</span>
             </div>
             <p><strong>Username :</strong> {userName}</p>

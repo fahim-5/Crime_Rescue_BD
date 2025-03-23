@@ -45,7 +45,7 @@ exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    console.log("Login attempt for email:", email); // ✅ Debug log
+  
 
     if (!email || !password) {
       return res.status(400).json({ message: "All fields are required." });
@@ -54,7 +54,7 @@ exports.loginUser = async (req, res) => {
     const connection = await connectDB();
     const [users] = await connection.execute("SELECT * FROM users WHERE email = ?", [email]);
 
-    console.log("User found:", users.length > 0 ? users[0] : "No user found"); // ✅ Debug log
+  
 
     if (users.length === 0) {
       return res.status(404).json({ message: "User not found." });
@@ -64,7 +64,7 @@ exports.loginUser = async (req, res) => {
 
     const isMatch = await bcrypt.compare(password, user.password);
 
-    console.log("Password match:", isMatch); // ✅ Debug log
+  
 
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid credentials." });
@@ -76,7 +76,7 @@ exports.loginUser = async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    console.log("Login successful, token generated"); // ✅ Debug log
+  
 
     res.status(200).json({
       message: "Login successful.",
