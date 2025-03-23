@@ -112,13 +112,6 @@
 
 
 
-
-
-
-
-
-
-
 /* Basic pop-up styling */
 
 
@@ -226,7 +219,11 @@
     background-color: #ff4757;
 }
 
-/* Popup Styling */
+
+
+
+
+/* Popup Overlay */
 .popup {
     position: fixed;
     top: 0;
@@ -238,26 +235,83 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    /* backdrop-filter: blur(5px); */
+    transition: opacity 0.3s ease-in-out;
 }
 
 /* Popup Content */
 .popup-content {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.95); /* Light glass effect */
+    padding: 25px;
+    border-radius: 12px;
     width: 90%;
-    max-width: 400px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 420px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    text-align: left;
+    animation: fadeIn 0.3s ease-in-out;
+    position: relative;
+}
+
+/* Popup Heading */
+.popup-content h1 {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #e74c3c;
+    border-bottom: 2px solid #e74c3c;
+    padding-bottom: 10px;
     text-align: center;
+}
+
+/* Crime Details Text */
+.popup-content p {
+    font-size: 1.1em;
+    color: #333;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 8px;
+    background: #f8f9fa;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Alternating background for better readability */
+.popup-content p:nth-child(odd) {
+    background: #ffeeee;
+}
+
+.popup-content p:nth-child(even) {
+    background: #e7f7e7;
 }
 
 /* Close Button */
 .close-btn {
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
     position: absolute;
     top: 10px;
     right: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    background: #e74c3c;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
+.close-btn:hover {
+    background: darkred;
+    transform: scale(1.1);
+}
+
+/* Smooth Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

@@ -34,12 +34,12 @@ const LoginForm = () => {
       <section className="login-form">
         <h2>Login to Your Account</h2>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Email or Username</label>
           <input
             type="email"
             id="email"
             name="email"
-            placeholder="Enter your email"
+            placeholder="Enter your email or username"
             value={formData.email}
             onChange={handleChange}
             required

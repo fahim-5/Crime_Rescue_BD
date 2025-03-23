@@ -14,9 +14,6 @@
     font-family: 'Roboto', sans-serif; /* Modern Font */
     margin-top: 300px;
 }
- 
-
-
 
 /* Report Form */
 .report-form {
@@ -26,7 +23,7 @@
     padding: 35px;
     background-color: #fff;
     border-radius: 12px;
-    border-left: 6px solid #ff4757; /* Red border */
+    border-left: 6px solid #8c111b; /* Red border */
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
 }
 
@@ -34,11 +31,11 @@
 .report-form h2 {
     font-size: 2.2em;
     text-align: center;
-    color: #ff4757; /* Red color for the heading */
+    color: #af0514; /* Red color for the heading */
     font-weight: 700;
     margin-bottom: 10px;
-    text-transform: uppercase;
     letter-spacing: 1px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 /* Form Group */
@@ -57,27 +54,30 @@
     font-weight: 700;
 }
 
-/* Input Fields */
+/* Input Fields - Full Width */
 .report-form input[type="text"],
 .report-form input[type="datetime-local"],
 .report-form select,
 .report-form input[type="number"],
-.report-form textarea {
-    width: 100%;
+.report-form textarea,
+.report-form input[type="file"] {
+    width: 100%; /* Make all inputs and selects full width */
     padding: 12px 18px;
-    border: 2px solid #ff4757; /* Red border */
-    border-radius: 8px;
+    border: 2px solid #c41927bd; /* Red border */
+    border-radius: 7px;
     font-size: 1.1em;
     background: #f4f7f6; /* Light grey background for input fields */
     color: #333;
     transition: all 0.3s ease;
     box-sizing: border-box;
+    border-width: 1px;
 }
 
 /* Focus Effect */
 .report-form input:focus,
 .report-form select:focus,
-.report-form textarea:focus {
+.report-form textarea:focus,
+.report-form input[type="file"]:focus {
     border-color: #ff6b81; /* Lighter red on focus */
     outline: none;
     box-shadow: 0 0 8px rgba(255, 71, 87, 0.5); /* Slight red glow */
@@ -105,7 +105,7 @@
 
 /* Submit Button */
 .report-form button[type="submit"] {
-    background: #ff4757; /* Red button */
+    background: #980d18; /* Red button */
     color: white;
     font-size: 1.3em;
     font-weight: 600;
@@ -118,10 +118,11 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    margin :15px;
 }
 
 .report-form button[type="submit"]:hover {
-    background: #ff6b81; /* Lighter red on hover */
+    background: #b4263b; /* Lighter red on hover */
     transform: translateY(-3px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
@@ -149,4 +150,107 @@
     .report-form textarea {
         font-size: 1em;
     }
+}
+
+/* ========================= */
+/* Multimedia Upload Styling */
+/* ========================= */
+
+/* File Upload Section */
+.report-form .file-upload {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+/* Labels for File Uploads */
+.report-form .file-upload label {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Preview Container */
+.report-form .preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Image Preview */
+.report-form .preview-container img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #ff4757;
+}
+
+/* Video Preview */
+.report-form .preview-container video {
+    width: 100%;
+    max-height: 200px;
+    border-radius: 8px;
+    border: 2px solid #ff4757;
+}
+
+/* Remove Button Styling */
+.remove-btn {
+    background-color: #ad1a26; /* Red color to indicate removal */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.remove-btn:hover {
+    background-color: #ff6b81; /* Slightly lighter red on hover */
+    transform: scale(1.05);
+}
+
+.remove-btn:active {
+    transform: scale(1);
+}
+
+/* Location Input Styles */
+.location-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.location-input-container input {
+    width: 100%;
+    padding-right: 40px; /* Space for the icon */
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+.map-button {
+    position: absolute;
+    right: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.map-button svg {
+    color: #666565;
+    font-size: 20px;
+}
+
+.map-button:hover svg {
+    color: #696666;
 }

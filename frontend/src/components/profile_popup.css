@@ -1,26 +1,28 @@
 /* ================= Profile Popup - Elegant Glassmorphism ================= */
 .profile-popup {
     position: fixed;
-    top: 30.5%;
-    left: 86%;
+    top: 34.6%;
+    left: 87%;
     transform: translate(-50%, -50%);
-    background: rgba(30, 30, 30, 0.8); /* Semi-transparent dark background */
+    background: rgba(30, 30, 30, 0.93); /* Elegant dark glass */
+    /* backdrop-filter: blur(10px);  */
     padding: 25px;
-    width: 340px;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); /* Deep, elegant shadow */
+    width: 360px;
+    /* border-radius: 0px 14 px 14px 0px; */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     z-index: 1050;
     transition: opacity 0.3s ease, transform 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Title */
 .profile-popup h2 {
     font-size: 1.8rem;
-    color: #f8f8f8;
-    margin-bottom: 15px;
+    /* color: #e94560; */
+    color: white;
+    margin-bottom: 18px;
     text-align: center;
-    font-weight: bold;
+    font-weight: bolder;
 }
 
 /* Profile Header */
@@ -34,28 +36,32 @@
 .profile-header .rank {
     font-size: 1rem;
     font-weight: bold;
-    color: #fff;
-    background: linear-gradient(135deg, #ff8a00, #e52e71);
-    padding: 5px 10px;
+    color: white;
+    background: linear-gradient(135deg, #da4325, #e52e71);
+    padding: 6px 12px;
     border-radius: 20px;
-    box-shadow: 0 2px 8px rgba(255, 138, 0, 0.4);
+    box-shadow: 0 2px 10px rgba(255, 138, 0, 0.4);
 }
 
 /* Profile Details */
 .profile-popup p {
     font-size: 1rem;
-    margin: 8px 0;
+    font-family: fantasy;
     color: #e0e0e0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
 }
 
+/* Highlight important text */
 .profile-popup p strong {
-    color: #ffba08;
+    color: #df5a17e6;
 }
 
-/* Logout Button - Stylish */
+/* Logout Button - Premium Style */
 .logout-btn {
     padding: 12px;
-    background: linear-gradient(135deg, #d4145a, #fbb03b);
+    background: linear-gradient(135deg, #c4253d, #9b1d32);
     color: white;
     border: none;
     border-radius: 8px;
@@ -64,29 +70,31 @@
     cursor: pointer;
     transition: background 0.3s ease, transform 0.3s ease;
     font-weight: bold;
+    box-shadow: 0 5px 15px rgba(255, 75, 80, 0.4);
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .logout-btn:hover {
-    background: linear-gradient(135deg, #ff416c, #ff4b2b);
-    transform: scale(1.05);
+    background: linear-gradient(135deg, #b71e42, #5f0312);
+    transform: scale(1.06);
 }
 
-/* Profile Button (Fahim's Username Button) */
+/* Profile Button */
 .profile-btn {
-    background: linear-gradient(135deg, #4a90e2, #9013fe);
+    background: linear-gradient(135deg, #8a0024, #c32b42);
     color: white;
     font-size: 1rem;
     font-weight: bold;
-    padding: 7px 14px;
+    padding: 8px 16px;
     border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
+    transition: background 0.3s ease, transform 0.3s ease;
     border: none;
 }
 
 .profile-btn:hover {
-    background: linear-gradient(135deg, #5c6bc0, #ab47bc);
-    transform: scale(1.05);
+    background: linear-gradient(135deg, #6d001b, #a8273a);
+    transform: scale(1.08);
 }
 
 /* Background Overlay */
@@ -94,13 +102,13 @@
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100%;
+    height: 100%;
     background: rgba(0, 0, 0, 0.6);
     z-index: 1000;
 }
 
-/* Smooth Pop-up Animation */
+/* Popup Fade-in Animation */
 @keyframes fadeInPopup {
     from {
         opacity: 0;
@@ -113,11 +121,43 @@
 }
 
 .profile-popup {
-    animation: fadeInPopup 0.3s ease-in-out;
+    animation: fadeInPopup 0.4s ease-in-out;
 }
 
 
-/* =================== Custom Alert Box - Elegant & Modern =================== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =================== Custom Alert Box - Modern & Sleek =================== */
 .custom-alert {
     position: fixed;
     top: 20%;
@@ -127,16 +167,18 @@
     color: white;
     font-size: 1.2rem;
     font-weight: bold;
-    padding: 20px 30px;
-    width: 350px;
-    border-radius: 12px;
+    padding: 22px 32px;
+    width: 360px;
+    border-radius: 14px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(233, 69, 96, 0.4);
-    z-index: 9999; /* Ensures it's always on top */
-    display: none; /* Hidden by default */
+    box-shadow: 0 12px 35px rgba(233, 69, 96, 0.4);
+    z-index: 9999;
+    display: none;
     opacity: 0;
     transition: opacity 0.4s ease-in-out, transform 0.3s ease-in-out;
 }
+
+
 
 /* Alert Box - Show Effect */
 .custom-alert.show {
@@ -162,11 +204,11 @@
 }
 
 .alert-info {
-    background: linear-gradient(135deg, #b81045, #64b5f6);
+    background: linear-gradient(135deg, #b81045, #b13c46);
     box-shadow: 0 10px 30px rgba(149, 21, 21, 0.4);
 }
 
-/* Dismiss Button */
+/* Close Button */
 .alert-close {
     position: absolute;
     top: 10px;
@@ -174,12 +216,11 @@
     font-size: 1.5rem;
     cursor: pointer;
     color: white;
-    transition: 0.3s;
+    transition: 0.3s ease;
     font-weight: bold;
 }
 
 .alert-close:hover {
-    color: #fff;
     transform: scale(1.2);
 }
 

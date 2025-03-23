@@ -22,12 +22,14 @@
   font-weight: bold;
   color: #e94560;
   text-decoration: none;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .logo:hover {
-  color: #ff4757;
+  color: #ffffff;
   transform: scale(1.05);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 /* Navigation Links */
@@ -45,7 +47,9 @@
 
 .nav-links a {
   text-decoration: none;
-  color: white;
+  color: rgb(226, 214, 214);
+  font-weight: 600;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 0.9rem; /* Reduced font size */
   padding: 6px 10px; /* Adjusted padding */
   border-radius: 5px;

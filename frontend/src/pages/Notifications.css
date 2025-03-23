@@ -1,43 +1,54 @@
-
 /* Notifications container */
 .notifications-container {
-    max-width: 800px;
-    margin: 100px 365px;
-    padding: 20px;
+    max-width: 700px;
+    margin: 80px auto;
+    padding: 25px;
     text-align: left;
     min-height: 100vh;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Page heading */
 .notifications-container h1 {
     text-align: center;
-    font-size: 2em;
-    color: #2c3e50;
-    margin-bottom: 20px;
+    font-size: 2.2em;
+    font-weight: 600;
+    color: #34495e;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
 }
 
 /* Individual notification box */
 .notification {
-    background-color: #ffffff;
-    border-left: 5px solid #e74c3c;
-    padding: 15px;
-    margin-bottom: 15px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+    background: #ffffff;
+    border-left: 6px solid #e74c3c;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+.notification:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 /* Notification text */
 .notification p {
-    font-size: 1.1em;
-    color: #333;
+    font-size: 1.15em;
+    color: #2c3e50;
     margin: 0;
+    font-weight: 500;
 }
 
 /* Timestamp */
 .timestamp {
     display: block;
-    font-size: 0.9em;
-    color: #777;
-    margin-top: 5px;
+    font-size: 0.85em;
+    color: #7f8c8d;
+    margin-top: 6px;
+    font-style: italic;
 }
-

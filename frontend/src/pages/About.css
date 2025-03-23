@@ -1,41 +1,48 @@
 
+
+/* Apply Poppins font only to the About page */
+.about-page {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+/* Optionally, make headings bold */
+.about-page h2, 
+.about-page h3, 
+.about-page h4 {
+    font-weight: 600;
+}
+
 /* Hero Section */
-.intro {
+.about-page .intro {
     background: linear-gradient(135deg, #7c99b8, #5a7fa6);
     color: #0e0d0d;
     padding: 60px 20px;
     text-align: center;
     margin-top: 80px;
-    border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-
+  
 }
 
-
-main{
-    z-index: -2;
-}
-
-.intro h2 {
+.about-page .intro h2 {
     font-size: 36px;
-    font-weight: bold;
     margin-bottom: 15px;
 }
 
-.intro p {
+.about-page .intro p {
     font-size: 18px;
     opacity: 0.9;
+    font-family:'Times New Roman', Times, serif;
 }
 
 /* Features Section */
-.features {
+.about-page .features {
     display: flex;
     justify-content: space-around;
     gap: 20px;
     margin-top: 40px;
 }
 
-.feature {
+.about-page .feature {
     background: #ffffff;
     padding: 25px;
     width: 30%;
@@ -45,24 +52,24 @@ main{
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.feature:hover {
+.about-page .feature:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.feature h3 {
+.about-page .feature h3 {
     font-size: 24px;
     margin-bottom: 10px;
     color: #333;
 }
 
-.feature p {
+.about-page .feature p {
     font-size: 16px;
     opacity: 0.8;
 }
 
 /* How it Works Section */
-.how-it-works {
+.about-page .how-it-works {
     background: linear-gradient(135deg, #e9ecef, #d6dbe1);
     padding: 50px;
     margin-top: 50px;
@@ -70,21 +77,21 @@ main{
     border-radius: 15px;
 }
 
-.how-it-works h3 {
+.about-page .how-it-works h3 {
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 30px;
     color: #333;
 }
 
-.steps {
+.about-page .steps {
     display: flex;
     justify-content: space-between;
     gap: 20px;
     margin-top: 20px;
 }
 
-.step {
+.about-page .step {
     background: #fff;
     padding: 25px;
     width: 30%;
@@ -93,24 +100,24 @@ main{
     transition: all 0.3s ease-in-out;
 }
 
-.step:hover {
+.about-page .step:hover {
     transform: scale(1.05);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
-.step h4 {
+.about-page .step h4 {
     font-size: 22px;
     margin-bottom: 15px;
     color: #444;
 }
 
-.step p {
+.about-page .step p {
     font-size: 16px;
     opacity: 0.8;
 }
 
 /* Button Styling */
-.button {
+.about-page .button {
     display: inline-block;
     padding: 12px 24px;
     background: linear-gradient(135deg, #ff7e5f, #ff4e50);
@@ -125,20 +132,8 @@ main{
     margin-top: 20px;
 }
 
-.button:hover {
+.about-page .button:hover {
     background: linear-gradient(135deg, #ff4e50, #ff7e5f);
     transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(255, 78, 80, 0.3);
 }
-
-
-
-
-
-
-
-
-
-
-
-

@@ -5,6 +5,7 @@
     align-items: center;
     min-height: 100vh;
     background-color: #f4f4f4;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 /* Welcome Section */
@@ -23,10 +24,10 @@
 /* Welcome Heading */
 .welcome-heading {
     font-size: 3.2em;
-    color: #e74c3c;  /* Crime theme color */
+    color: #9e192d;  /* Crime theme color */
     font-weight: bold;
     margin-bottom: 20px;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     letter-spacing: 1px;
     line-height: 1.2;
     font-family: 'Times New Roman', Times, serif;

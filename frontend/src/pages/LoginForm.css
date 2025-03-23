@@ -1,105 +1,114 @@
-/* General Styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
-}
-
-/* Main container */
+/* General Styling - Scoped for Login Page */
 .login-page {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     padding: 20px;
-    margin-top: 20px;
 }
 
-/* Login Form Styling */
+/* Login Form Container */
 .login-form {
-    background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  max-width: 400px;
-  width: 100%;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 35px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
 }
 
+.login-form:hover {
+    transform: translateY(-3px);
+}
+
+/* Form Heading */
 .login-form h2 {
-    text-align: center;
-  margin-bottom: 20px;
-  font-size: 1.8rem;
-  color: #333;}
+    font-size: 2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
 
 /* Label Styling */
 .login-form label {
     font-size: 1rem;
-  color: #333;
-  margin-bottom: 5px;
-  display: block;
+    color: #555;
+    font-weight: 500;
+    display: block;
+    text-align: left;
+    margin-bottom: 6px;
 }
 
 /* Input Fields */
 .login-form input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
     font-size: 1rem;
     color: #333;
-    transition: border-color 0.3s ease-in-out;
+    background: #f8f9fa;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .login-form input:focus {
     border-color: #e94560;
-  outline: none;
+    outline: none;
+    box-shadow: 0 0 8px rgba(233, 69, 96, 0.3);
 }
 
-/* Login Button Styling */
+/* Login Button */
 .login-form .login-button {
     width: 100%;
-    padding: 12px;
-    background-color: #e94560;
+    padding: 14px;
+    background: linear-gradient(135deg, #e94560, #ff6b81);
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     font-size: 1.1rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease-in-out;
 }
 
 .login-form .login-button:hover {
-    background-color: #ff4757;
+    background: linear-gradient(135deg, #ff4757, #ff798f);
+    box-shadow: 0 5px 15px rgba(233, 69, 96, 0.3);
+    transform: translateY(-2px);
 }
 
 /* Signup Link */
 .login-form p {
-    text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #555;
+    margin-top: 15px;
 }
 
 .login-form .signup-link {
     color: #e94560;
-  text-decoration: none;
-  font-weight: bold;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
 }
 
 .login-form .signup-link:hover {
+    color: #ff4757;
     text-decoration: underline;
 }
 
-/* Mobile Styling */
+/* Responsive Design */
 @media screen and (max-width: 768px) {
     .login-form {
-        padding: 20px;
+        padding: 25px;
         max-width: 90%;
     }
 
     .login-form h2 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
 
     .login-form input,
