@@ -89,7 +89,7 @@
     resize: vertical;
 }
 
-/* Radio Button Group */
+/* Custom Radio Button */
 .report-form .radio-group {
     display: flex;
     gap: 20px;
@@ -97,11 +97,30 @@
     margin-top: 10px;
 }
 
+.report-form .radio-group input[type="radio"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #b4263b;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.report-form .radio-group input[type="radio"]:checked {
+    background-color: #b4263b;
+    border-color: #b4263b;
+}
+
 .report-form .radio-group label {
     font-size: 1.1em;
     font-weight: 600;
     color: #2c3e50;
+    cursor: pointer;
 }
+
 
 /* Submit Button */
 .report-form button[type="submit"] {

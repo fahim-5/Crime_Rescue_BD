@@ -105,12 +105,12 @@ const Navbar = () => {
           <div className="overlay" onClick={() => setProfileOpen(false)}></div>
           <div className="profile-popup" ref={popupRef}>
             <div className="profile-header">
-              <h2>Profile Details</h2>
+              <h2>Fahim Faysal</h2>
               <span className="rank">Gold</span>
             </div>
-            <p><strong>Username:</strong> {userName}</p>
-            <p><strong>Status:</strong> Platinum</p>
-            <p><strong>Earned Points:</strong> 1200</p>
+            <p><strong>Username :</strong> {userName}</p>
+            <p><strong>Stats :</strong> Platinum</p>
+            <p><strong>Earned Points :</strong> 1200</p>
             <button className="logout-btn" onClick={handleLogout}>
               Logout
             </button>

@@ -1,5 +1,5 @@
 /* General Styling - Scoped for Login Page */
-.login-page {
+.auth-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,7 +9,7 @@
 }
 
 /* Login Form Container */
-.login-form {
+.auth-box {
     background: #ffffff;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
@@ -20,32 +20,36 @@
     transition: transform 0.3s ease-in-out;
 }
 
-.login-form:hover {
+.auth-box:hover {
     transform: translateY(-3px);
 }
 
 /* Form Heading */
-.login-form h2 {
+.auth-title {
     font-size: 2rem;
     font-weight: 600;
-    color: #2c3e50;
+    color: #9e192d; 
     margin-bottom: 25px;
     letter-spacing: 1px;
 }
 
 /* Label Styling */
-.login-form label {
+.auth-label {
     font-size: 1rem;
-    color: #555;
+    color: #2e2626;
     font-weight: 500;
     display: block;
     text-align: left;
     margin-bottom: 6px;
+    margin-left: 7px;
+    margin-top: 4px;
+    font-weight: 450;
 }
 
 /* Input Fields */
-.login-form input {
-    width: 100%;
+.auth-input {
+    width: 92%;
+  margin-left: 7px;
     padding: 12px;
     border: 2px solid #ddd;
     border-radius: 6px;
@@ -55,18 +59,20 @@
     transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.login-form input:focus {
+.auth-input:focus {
     border-color: #e94560;
     outline: none;
     box-shadow: 0 0 8px rgba(233, 69, 96, 0.3);
 }
 
 /* Login Button */
-.login-form .login-button {
+.auth-button {
     width: 100%;
     padding: 14px;
     background: linear-gradient(135deg, #e94560, #ff6b81);
-    color: #fff;
+    color: #ffffff;
+    margin-top: 15px;
+    margin-left: 7px;
     border: none;
     border-radius: 6px;
     font-size: 1.1rem;
@@ -75,44 +81,44 @@
     transition: all 0.3s ease-in-out;
 }
 
-.login-form .login-button:hover {
+.auth-button:hover {
     background: linear-gradient(135deg, #ff4757, #ff798f);
     box-shadow: 0 5px 15px rgba(233, 69, 96, 0.3);
     transform: translateY(-2px);
 }
 
 /* Signup Link */
-.login-form p {
+.auth-footer {
     font-size: 0.95rem;
     color: #555;
     margin-top: 15px;
 }
 
-.login-form .signup-link {
+.auth-link {
     color: #e94560;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease-in-out;
 }
 
-.login-form .signup-link:hover {
+.auth-link:hover {
     color: #ff4757;
     text-decoration: underline;
 }
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
-    .login-form {
+    .auth-box {
         padding: 25px;
         max-width: 90%;
     }
 
-    .login-form h2 {
+    .auth-title {
         font-size: 1.6rem;
     }
 
-    .login-form input,
-    .login-form .login-button {
+    .auth-input,
+    .auth-button {
         font-size: 1rem;
     }
 }

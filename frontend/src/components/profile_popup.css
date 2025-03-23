@@ -1,12 +1,13 @@
 /* ================= Profile Popup - Elegant Glassmorphism ================= */
 .profile-popup {
     position: fixed;
-    top: 34.6%;
+    top: 34.4%;
     left: 87%;
     transform: translate(-50%, -50%);
     background: rgba(30, 30, 30, 0.93); /* Elegant dark glass */
     /* backdrop-filter: blur(10px);  */
     padding: 25px;
+    border-radius: 0% 0% 0 5%;
     width: 360px;
     /* border-radius: 0px 14 px 14px 0px; */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
@@ -23,6 +24,7 @@
     margin-bottom: 18px;
     text-align: center;
     font-weight: bolder;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 /* Profile Header */
@@ -51,6 +53,7 @@
     padding: 10px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 /* Highlight important text */

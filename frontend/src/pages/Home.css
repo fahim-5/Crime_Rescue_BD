@@ -6,6 +6,7 @@
     min-height: 100vh;
     background-color: #f4f4f4;
     font-family: 'Times New Roman', Times, serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
 /* Welcome Section */

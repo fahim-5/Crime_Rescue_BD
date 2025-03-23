@@ -3,6 +3,7 @@
 /* Apply Poppins font only to the About page */
 .about-page {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
 }
 
 /* Optionally, make headings bold */
@@ -18,7 +19,6 @@
     color: #0e0d0d;
     padding: 60px 20px;
     text-align: center;
-    margin-top: 80px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   
 }

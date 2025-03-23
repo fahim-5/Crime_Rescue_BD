@@ -5,9 +5,9 @@ footer {
     padding: 20px 10px;
     font-size: 0.85rem;
     text-align: center;
-    margin-top: 20px;
     position: relative;
     box-sizing: border-box;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .footer-content {

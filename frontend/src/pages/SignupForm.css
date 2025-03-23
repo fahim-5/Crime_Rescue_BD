@@ -1,117 +1,235 @@
-/* General Styling */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
-  margin: 0;
-  padding: 0;
-}
-
-/* Main container */
-.main-container {
+/* General Styling - Scoped for Signup Page */
+.auth-signup-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 60vh;/* Adjust height to ensure 300px margin */
-  margin-top: 300px; /* Space from the top */
+  height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   padding: 20px;
 }
 
-/* Signup Form Styling */
-.signup-form {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  max-width: 400px;
+/* Signup Form Container */
+.auth-signup-box {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  padding: 35px;
+  max-width: 800px;
   width: 100%;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
 }
 
 /* Form Heading */
-.signup-form h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 1.8rem;
-  color: #333;
+.auth-signup-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #9e192d;  
+  margin-bottom: 25px;
+  letter-spacing: 1px;
 }
 
-/* Label Styling */
-.signup-form label {
+/* Left and Right Columns */
+.auth-signup-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.auth-left,
+.auth-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-label {
   font-size: 1rem;
-  color: #333;
-  margin-bottom: 5px;
+  color: #1d1818;
+  font-weight: 500;
   display: block;
+  text-align: left;
+  margin-bottom: 6px;
+  margin-left: 7px;
+  font-family: 'Times New Roman', Times, serif;
+  margin-top: 4px;
 }
 
 /* Input Fields */
-.signup-form input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 1rem;
-  color: #333;
-  transition: border-color 0.3s ease-in-out;
-}
-
-.signup-form input:focus {
-  border-color: #e94560;
-  outline: none;
-}
-
-/* Submit Button Styling */
-.signup-form button {
+.auth-input {
   width: 100%;
   padding: 12px;
-  background-color: #e94560;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #333;
+  background: #f8f9fa;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.signup-form button:hover {
-  background-color: #ff4757;
+.auth-input:focus {
+  border-color: #e94560;
+  outline: none;
+  box-shadow: 0 0 8px rgba(233, 69, 96, 0.3);
 }
+
+/* Signup Button */
+.auth-signup-button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #e94560, #ff6b81);
+  color: #ffffff;
+  margin-top: 15px;
+  border: none;
+  margin-left: 210px;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.auth-signup-button:hover {
+  background: linear-gradient(135deg, #ff4757, #ff798f);
+  box-shadow: 0 5px 15px rgba(233, 69, 96, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Error & Success Messages */
+.auth-error-message {
+  color: #fff;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #ff4d4d;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.5s ease-out;
+}
+
+.auth-success-message {
+  color: #fff;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #4caf50;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.5s ease-out;
+}
+
+/* Slide-in animation */
+@keyframes slideIn {
+  0% {
+    transform: translateX(-50%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 
 /* Login Link */
-.signup-form p {
-  text-align: center;
-  font-size: 0.9rem;
+.auth-signup-footer {
+  font-size: 0.95rem;
   color: #555;
+  margin-top: 15px;
 }
 
-.signup-form .login-link {
+.auth-signup-link {
   color: #e94560;
-  cursor: pointer;
-  font-weight: bold;
   text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
 }
 
-.signup-form .login-link:hover {
+.auth-signup-link:hover {
+  color: #ff4757;
   text-decoration: underline;
 }
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
-  .main-container {
-    margin-top: 200px; /* Adjust margin for smaller screens */
-    min-height: calc(100vh - 200px);
+  .auth-signup-form {
+    grid-template-columns: 1fr;
   }
 
-  .signup-form {
-    padding: 20px;
+  .auth-signup-box {
+    padding: 25px;
     max-width: 90%;
   }
 
-  .signup-form h2 {
-    font-size: 1.5rem;
+  .auth-signup-title {
+    font-size: 1.6rem;
   }
 
-  .signup-form input,
-  .signup-form button {
+  .auth-input,
+  .auth-signup-button {
     font-size: 1rem;
   }
+}
+
+
+
+/* Remove default radio button styles
+.auth-role-options input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid black;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+} */
+
+
+.auth-role-options input[type="radio"]:checked::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+/* Custom radio button checked style */
+.auth-role-options input[type="radio"]:checked::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Space between radio buttons */
+.auth-role-options label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Adjust spacing */
+.auth-role-section {
+  margin-top: 15px;
+}
+
+.auth-role-options {
+  margin-top: 10px;
+  display: flex;
+  gap: 15px;
 }
