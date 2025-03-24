@@ -204,8 +204,8 @@ const SignupForm = () => {
                   <input 
                     type="radio" 
                     name="role" 
-                    value="Public" 
-                    checked={formData.role === "Public"} 
+                    value="public" 
+                    checked={formData.role === "public"} 
                     onChange={handleRoleChange} 
                   /> Public
                 </label>
@@ -213,8 +213,8 @@ const SignupForm = () => {
                   <input 
                     type="radio" 
                     name="role" 
-                    value="Police" 
-                    checked={formData.role === "Police"} 
+                    value="police" 
+                    checked={formData.role === "police"} 
                     onChange={handleRoleChange} 
                   /> Police
                 </label>
@@ -222,8 +222,8 @@ const SignupForm = () => {
                   <input 
                     type="radio" 
                     name="role" 
-                    value="Admin" 
-                    checked={formData.role === "Admin"} 
+                    value="admin" 
+                    checked={formData.role === "admin"} 
                     onChange={handleRoleChange} 
                   /> Admin
                 </label>
