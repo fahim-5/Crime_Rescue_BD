@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./CrimeReportForm.css";
-import { FaMapMarkerAlt } from "react-icons/fa";
+import { FaMapMarkerAlt, FaTimes, FaCheck } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -13,6 +13,9 @@ const CrimeReportForm = () => {
   const [numCriminals, setNumCriminals] = useState("");
   const [victimGender, setVictimGender] = useState("male");
   const [armed, setArmed] = useState("yes");
+  const [alert, setAlert] = useState(null);
+  const photoInputRef = React.createRef();
+  const videoInputRef = React.createRef();
 
   const handlePhotoChange = (event) => {
     const files = Array.from(event.target.files);
@@ -24,26 +27,65 @@ const CrimeReportForm = () => {
     setVideos([...videos, ...files]);
   };
 
-  const handleSubmit = (event) => {
+  const showAlert = (message, type) => {
+    setAlert({ message, type });
+    setTimeout(() => setAlert(null), 5000);
+  };
+
+  const resetForm = () => {
+    setLocation("");
+    setTime(new Date());
+    setCrimeType("theft");
+    setNumCriminals("");
+    setVictimGender("male");
+    setArmed("yes");
+    setPhotos([]);
+    setVideos([]);
+    if (photoInputRef.current) photoInputRef.current.value = "";
+    if (videoInputRef.current) videoInputRef.current.value = "";
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Form Submitted:", {
-      location,
-      time,
-      photos,
-      videos,
-      crimeType,
-      numCriminals,
-      victimGender,
-      armed,
-    });
+    
+    try {
+      const formData = new FormData();
+      formData.append("location", location);
+      formData.append("time", time.toISOString());
+      formData.append("crimeType", crimeType);
+      formData.append("numCriminals", numCriminals);
+      formData.append("victimGender", victimGender);
+      formData.append("armed", armed);
+  
+      photos.forEach(photo => formData.append("photos", photo));
+      videos.forEach(video => formData.append("videos", video));
+  
+      const response = await fetch("http://localhost:5000/api/reports", {
+        method: "POST",
+        body: formData,
+      });
+  
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.message || "Failed to submit report");
+      }
+  
+      resetForm();
+      showAlert("Report submitted successfully!", "success");
+    } catch (error) {
+      console.error("Submission error:", error);
+      showAlert(error.message || "Please try again later.", "error");
+    }
   };
 
   const handleMapButtonClick = () => {
-    // Opens the location in Google Maps when the button is clicked
-    window.open(
-      `https://www.google.com/maps?q=${encodeURIComponent(location)}`,
-      "_blank"
-    );
+    if (location.trim()) {
+      window.open(
+        `https://www.google.com/maps?q=${encodeURIComponent(location)}`,
+        "_blank"
+      );
+    }
   };
 
   const removePhoto = (index) => {
@@ -58,6 +100,21 @@ const CrimeReportForm = () => {
 
   return (
     <main>
+     {alert && (
+      <>
+        <div className="alert-backdrop" onClick={() => setAlert(null)} />
+        <div className={`alert alert-${alert.type}`}>
+          <div className="alert-content">
+            {alert.type === "success" ? <FaCheck /> : <FaTimes />}
+            <span className="alert-message">{alert.message}</span>
+            <button onClick={() => setAlert(null)} className="alert-close">
+              &times;
+            </button>
+          </div>
+        </div>
+      </>
+    )}
+
       <section className="report-form">
         <h2>Report a Crime</h2>
         <form onSubmit={handleSubmit}>
@@ -68,19 +125,22 @@ const CrimeReportForm = () => {
               type="text"
               id="location"
               name="location"
-              placeholder="Enter or select the location"
+              placeholder="Enter location"
               value={location}
-              onChange={(e) => setLocation(e.target.value)} // Allow manual entry
+              onChange={(e) => setLocation(e.target.value)}
+              required
             />
             <button
               type="button"
               className="map-button"
               onClick={handleMapButtonClick}
+              disabled={!location.trim()}
             >
               <FaMapMarkerAlt size={20} />
             </button>
           </div>
 
+          {/* Time of Crime */}
           <label htmlFor="time">Time of Crime</label>
           <div className="datepicker-container">
             <DatePicker
@@ -89,6 +149,7 @@ const CrimeReportForm = () => {
               showTimeSelect
               dateFormat="Pp"
               className="datepicker-input"
+              required
             />
           </div>
 
@@ -122,7 +183,7 @@ const CrimeReportForm = () => {
             required
           />
 
-          {/* Victim Gender */}
+          {/* Victim's Gender */}
           <label htmlFor="victim-gender">Victim's Gender</label>
           <select
             id="victim-gender"
@@ -140,26 +201,19 @@ const CrimeReportForm = () => {
           {/* Armed Criminals */}
           <label>Are the criminals armed?</label>
           <div className="radio-group">
-            <input
-              type="radio"
-              id="yes"
-              name="armed"
-              value="yes"
-              checked={armed === "yes"}
-              onChange={() => setArmed("yes")}
-              required
-            />
-            <label htmlFor="yes">Yes</label>
-            <input
-              type="radio"
-              id="no"
-              name="armed"
-              value="no"
-              checked={armed === "no"}
-              onChange={() => setArmed("no")}
-              required
-            />
-            <label htmlFor="no">No</label>
+            {['yes', 'no'].map((value) => (
+              <label key={value} className="radio-label">
+                <input
+                  type="radio"
+                  name="armed"
+                  value={value}
+                  checked={armed === value}
+                  onChange={() => setArmed(value)}
+                  required
+                />
+                {value.charAt(0).toUpperCase() + value.slice(1)}
+              </label>
+            ))}
           </div>
 
           {/* Upload Photos */}
@@ -171,6 +225,7 @@ const CrimeReportForm = () => {
             accept="image/*"
             multiple
             onChange={handlePhotoChange}
+            ref={photoInputRef}
           />
           <div className="preview-container">
             {photos.map((photo, index) => (
@@ -185,7 +240,7 @@ const CrimeReportForm = () => {
                   onClick={() => removePhoto(index)}
                   className="remove-btn"
                 >
-                  Remove
+                  &times;
                 </button>
               </div>
             ))}
@@ -199,6 +254,7 @@ const CrimeReportForm = () => {
             name="crime-video"
             accept="video/*"
             onChange={handleVideoChange}
+            ref={videoInputRef}
           />
           <div className="preview-container">
             {videos.map((video, index) => (
@@ -211,14 +267,16 @@ const CrimeReportForm = () => {
                   onClick={() => removeVideo(index)}
                   className="remove-btn"
                 >
-                  Remove
+                  &times;
                 </button>
               </div>
             ))}
           </div>
 
           {/* Submit Button */}
-          <button type="submit">Submit Report</button>
+          <button type="submit" className="submit-btn">
+            Submit Report
+          </button>
         </form>
       </section>
     </main>
