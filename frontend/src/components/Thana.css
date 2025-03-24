@@ -1,0 +1,27 @@
+.suggestions-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 5px 0 0 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: white;
+    width: 250px; /* Adjust width to make the suggestion box smaller */
+    position: absolute; /* Ensure it's not affecting other components */
+    z-index: 9999; /* Make sure it's on top of other elements */
+  }
+  
+  .suggestions-list li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .suggestions-list li:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .auth-input {
+    position: relative; /* Ensure that suggestions are positioned correctly relative to the input */
+  }
+  

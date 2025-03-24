@@ -1,7 +1,7 @@
 /* ================= Profile Popup - Elegant Glassmorphism ================= */
 .profile-popup {
     position: fixed;
-    top: 34.4%;
+    top: 35.8%;
     left: 87%;
     transform: translate(-50%, -50%);
     background: rgba(30, 30, 30, 0.93); /* Elegant dark glass */

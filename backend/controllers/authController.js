@@ -3,18 +3,18 @@ const jwt = require("jsonwebtoken");
 const connectDB = require("../config/db");
 
 exports.registerUser = async (req, res) => {
-  const { full_name, username, email, national_id, passport, mobile, password, role } = req.body;
+  const { full_name, username, email, national_id, passport, mobile, address, password, role } = req.body;
 
-  // Ensure all required fields are filled, including mobile number
-  if (!full_name || !username || !email || !national_id || !password || !role || !mobile) {
+  // Ensure all required fields are filled, including address
+  if (!full_name || !username || !email || !national_id || !password || !role || !mobile || !address) {
     return res.status(400).json({ message: "All required fields must be filled" });
   }
 
-  // Validate password strength (e.g., min length)
+  // Validate password strength (at least 8 characters, includes letters & numbers)
   const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
   if (!passwordRegex.test(password)) {
     return res.status(400).json({
-      message: "Password must be at least 8 characters long and include a mix of upper, lower case letters, and numbers.",
+      message: "Password must be at least 8 characters long and include a mix of letters and numbers.",
     });
   }
 
@@ -22,7 +22,7 @@ exports.registerUser = async (req, res) => {
     const connection = await connectDB();
     const hashedPassword = await bcrypt.hash(password, 10); // Hash password
 
-    // Check if the user already exists based on email
+    // Check if user already exists based on email
     const [existingUser] = await connection.execute("SELECT * FROM users WHERE email = ?", [email]);
     if (existingUser.length > 0) {
       return res.status(400).json({ message: "User already exists with this email." });
@@ -33,28 +33,23 @@ exports.registerUser = async (req, res) => {
 
     // Insert new user into the database
     const [result] = await connection.execute(
-      "INSERT INTO users (full_name, username, email, national_id, passport, mobile_no, password, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-      [full_name, username, email, national_id, passport || null, mobile, hashedPassword, lowerCaseRole]
+      "INSERT INTO users (full_name, username, email, national_id, passport, mobile_no, address, password, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      [full_name, username, email, national_id, passport || null, mobile, address, hashedPassword, lowerCaseRole]
     );
-
-    // Close the connection if necessary
-    // connection.end(); 
 
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).json({
       message: "Error registering user",
-      error: process.env.NODE_ENV === "development" ? error.message : "Something went wrong. Please try again later."
+      error: process.env.NODE_ENV === "development" ? error.message : "Something went wrong. Please try again later.",
     });
   }
 };
 
-
-
 exports.loginUser = async (req, res) => {
   try {
-    const { email, password, role } = req.body; // role should be passed in the body as well
+    const { email, password, role } = req.body; // Role should be passed in the body as well
     if (!email || !password || !role) {
       return res.status(400).json({ message: "All fields are required." });
     }
@@ -86,7 +81,7 @@ exports.loginUser = async (req, res) => {
     res.status(200).json({
       message: "Login successful.",
       token,
-      user: { id: user.id, email: user.email, role: user.role },
+      user: { id: user.id, email: user.email, address: user.address, role: user.role }, // ✅ Include address in response
     });
 
   } catch (error) {
