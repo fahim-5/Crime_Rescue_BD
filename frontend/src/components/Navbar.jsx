@@ -40,7 +40,7 @@ const Navbar = () => {
     event.stopPropagation();
     showAlert("Logout successful");
     setProfileOpen(false); // Close the popup
-    navigate("/login"); // Redirect to login page
+    navigate("/"); // Redirect to login page
   };
 
   // Close the popup when clicking outside of it
@@ -78,10 +78,10 @@ const Navbar = () => {
         </nav>
 
         <div className="auth-links">
-          {location.pathname === "/signup" ? (
-            <Link to="/login" className="sign-up-btn">Sign In</Link>
-          ) : location.pathname === "/login" ? (
-            <Link to="/" className="sign-up-btn">Sign Up</Link>
+          {location.pathname === "/start" ? (
+            <Link to="/" className="sign-up-btn">Sign In</Link>
+          ) : location.pathname === "/" ? (
+            <Link to="/start" className="sign-up-btn">Sign Up</Link>
           ) : (
             <button onClick={toggleProfilePopup} className="profile-btn">
               {userName} {/* Display the fallback user name */}

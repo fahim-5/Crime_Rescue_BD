@@ -134,7 +134,7 @@ const LoginForm = () => {
         </form>
 
         <p className="auth-footer">
-          Don't have an account? <a href="/" className="auth-link">Sign Up</a>
+          Don't have an account? <a href="/start" className="auth-link">Sign Up</a>
         </p>
       </section>
     </main>

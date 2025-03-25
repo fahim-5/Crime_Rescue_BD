@@ -3,9 +3,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 40px 20px; /* Ensures margin from top and bottom */
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  padding: 20px;
 }
 
 /* Signup Form Container */
@@ -29,19 +29,21 @@
   letter-spacing: 1px;
 }
 
-/* Left and Right Columns */
+/* Form Layout - Keeps it Flexible */
 .auth-signup-form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
+/* Left and Right Columns */
 .auth-left,
 .auth-right {
   display: flex;
   flex-direction: column;
 }
 
+/* Labels */
 .auth-label {
   font-size: 1rem;
   color: #1d1818;
@@ -79,8 +81,8 @@
   background: linear-gradient(135deg, #e94560, #ff6b81);
   color: #ffffff;
   margin-top: 15px;
+  margin-left: 215px;
   border: none;
-  margin-left: 255px;
   border-radius: 6px;
   font-size: 1.1rem;
   font-weight: 600;
@@ -129,8 +131,7 @@
   }
 }
 
-
-/* Login Link */
+/* Footer & Login Link */
 .auth-signup-footer {
   font-size: 0.95rem;
   color: #555;
@@ -148,6 +149,15 @@
 .auth-signup-link:hover {
   color: #ff4757;
   text-decoration: underline;
+}
+
+/* Police Info Section */
+.auth-police-info {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 /* Responsive Design */
@@ -171,65 +181,12 @@
   }
 }
 
-
-
-/* Remove default radio button styles
-.auth-role-options input[type="radio"] {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: 16px;
-  height: 16px;
-  border: 2px solid black;
-  border-radius: 50%;
-  outline: none;
-  cursor: pointer;
-  position: relative;
-} */
-
-
-.auth-role-options input[type="radio"]:checked::before {
-  content: "";
-  width: 10px;
-  height: 10px;
-  background-color: black;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-
-/* Custom radio button checked style */
-.auth-role-options input[type="radio"]:checked::before {
-  content: "";
-  width: 10px;
-  height: 10px;
-  background-color: black;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* Space between radio buttons */
-.auth-role-options label {
+/* Ensure a consistent margin for the form */
+.auth-signup-container {
+  margin: 60px auto; /* Ensures spacing from header/footer */
+  padding: 50px 20px;
+  min-height: calc(100vh - 120px); /* Keeps space even if form grows */
   display: flex;
   align-items: center;
-  gap: 5px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-/* Adjust spacing */
-.auth-role-section {
-  margin-top: 15px;
-}
-
-.auth-role-options {
-  margin-top: 10px;
-  display: flex;
-  gap: 15px;
+  justify-content: center;
 }

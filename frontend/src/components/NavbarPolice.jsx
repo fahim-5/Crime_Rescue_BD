@@ -40,7 +40,7 @@ const NavbarPolice = () => {
     event.stopPropagation();
     showAlert("Logout successful");
     setProfileOpen(false); // Close the popup
-    navigate("/login"); // Redirect to login page
+    navigate("/"); // Redirect to login page
   };
 
   // Close the popup when clicking outside of it
@@ -79,7 +79,7 @@ const NavbarPolice = () => {
 
         <div className="auth-links">
           {location.pathname === "/signup" ? (
-            <Link to="/login" className="sign-up-btn">Sign In</Link>
+            <Link to="/" className="sign-up-btn">Sign In</Link>
           ) : location.pathname === "/login" ? (
             <Link to="/" className="sign-up-btn">Sign Up</Link>
           ) : (
