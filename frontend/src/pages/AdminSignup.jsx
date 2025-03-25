@@ -104,8 +104,9 @@ const AdminSignup = () => {
   
   return (
     <main className="auth-signup-container">
-      <section className="auth-signup-box">
+      <section className="auth-signup-box">    
         <h2 className="auth-signup-title">Create Your Account</h2>
+        <h3 className="auth-signup-indication">As an Admin</h3>
         {error && <p className="auth-error-message">{error}</p>}
         {success && <p className="auth-success-message">{success}</p>}
 

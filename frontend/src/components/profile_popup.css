@@ -127,61 +127,27 @@
     animation: fadeInPopup 0.4s ease-in-out;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* =================== Custom Alert Box - Modern & Sleek =================== */
 .custom-alert {
     position: fixed;
     top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: linear-gradient(135deg, #e94560, #ff758c);
+    background: linear-gradient(135deg, #750a0a, #c86172); /* Deep red gradient */
     color: white;
     font-size: 1.2rem;
     font-weight: bold;
-    padding: 22px 32px;
-    width: 360px;
+    padding: 12px 20px; /* Add padding for a more spacious alert */
+    width: 500px;
+    height: auto; /* Automatically adjusts height based on content */
     border-radius: 14px;
     text-align: center;
-    box-shadow: 0 12px 35px rgba(233, 69, 96, 0.4);
+    box-shadow: 0 12px 35px rgba(225, 199, 203, 0.4);
     z-index: 9999;
     display: none;
     opacity: 0;
     transition: opacity 0.4s ease-in-out, transform 0.3s ease-in-out;
 }
-
-
 
 /* Alert Box - Show Effect */
 .custom-alert.show {
@@ -192,23 +158,13 @@
 
 /* Different Alert Types */
 .alert-success {
-    background: linear-gradient(135deg, #28a745, #34d058);
-    box-shadow: 0 10px 30px rgba(40, 167, 69, 0.4);
+    background: linear-gradient(135deg, #30e55a7e, #34d058); /* Green for success */
+    box-shadow: 0 10px 30px rgba(40, 167, 69, 0.4); /* Green shadow */
 }
 
-.alert-error {
-    background: linear-gradient(135deg, #d32f2f, #ff5252);
-    box-shadow: 0 10px 30px rgba(211, 47, 47, 0.4);
-}
-
-.alert-warning {
-    background: linear-gradient(135deg, #ff9800, #ffb74d);
-    box-shadow: 0 10px 30px rgba(255, 152, 0, 0.4);
-}
-
-.alert-info {
-    background: linear-gradient(135deg, #b81045, #b13c46);
-    box-shadow: 0 10px 30px rgba(149, 21, 21, 0.4);
+.alert-success .alert-close {
+    color: #ffffff; /* White color for close button */
+    font-weight: bold;
 }
 
 /* Close Button */

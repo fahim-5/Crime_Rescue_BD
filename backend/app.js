@@ -6,6 +6,8 @@ const authRoutes = require("./routes/authRoutes");
 const reportRoutes = require("./routes/reportRoutes");  // Import the routes for crime reports
 const errorMiddleware = require("./middlewares/errorMiddleware");
 const upload = require("./middlewares/upload"); 
+const verificationRoutes = require("./routes/verificationRoutes");
+
 
 // Load environment variables
 dotenv.config();
@@ -18,6 +20,12 @@ app.use(express.json()); // JSON body parser
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));  // CORS for frontend
 app.use(morgan("dev")); // Logging requests
 app.use("/uploads", express.static("uploads"));  // Static file serving for uploaded files
+
+
+
+
+app.use("/api/verification", verificationRoutes);
+
 
 // Routes
 app.use("/public-admin/", authRoutes);   // Authentication routes

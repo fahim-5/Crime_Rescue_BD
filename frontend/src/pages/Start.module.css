@@ -1,226 +1,309 @@
 /* Container for the Start Page */
 .startContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  position: relative;
 }
 
 /* The Box that Holds Content */
 .startBox {
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    max-width: 500px;
-    margin: auto;
-    transition: all 0.3s ease-in-out;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 500px;
+  margin: auto;
+  transition: all 0.3s ease-in-out;
 }
 
 /* Alert Box (Centered Message) */
 .alertBox {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(255, 0, 0, 0.9); /* Red for error */
-    color: white;
-    padding: 15px 25px;
-    font-size: 1.2em;
-    font-weight: bold;
-    border-radius: 8px;
-    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.3s ease-in-out;
-    z-index: 999;
-    text-align: center;
-    cursor: pointer; /* Make it clickable */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 0, 0, 0.9);
+  color: white;
+  padding: 15px 25px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
+  z-index: 999;
+  text-align: center;
+  cursor: pointer;
 }
 
 /* Fade In Animation */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -60%);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-    }
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
 }
 
 /* Heading */
 .startHeading {
-    font-size: 2.5em;
-    color: #9e192d;
-    font-weight: bold;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
+  font-size: 2.5em;
+  color: #9e192d;
+  font-weight: bold;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  font-family: "Times New Roman", Times, serif;
 }
 
 /* Description */
 .startText {
-    font-size: 1.2em;
-    color: #555;
-    margin-bottom: 10px;
-    font-weight: 700;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 1.2em;
+  color: #2d0c0c;
+  margin-bottom: 30px;
+  font-weight: 700;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
 
-
-.startHeading h3 {
-    font-size: .7em;
-    color: #b40b0b;
-    font-weight: normal;
-    margin-top: 10px;
-    letter-spacing: 1px;
-    text-transform: none;
-    font-family: 'Times New Roman', Times, serif;
-    font-style: italic;
+/* Subheading */
+.startSubheading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.7em;
+  color: #b40b0b;
+  font-weight: normal;
+  margin-top: 10px;
+  margin-left: 100px;
+  letter-spacing: 1px;
+  font-family: "Times New Roman", Times, serif;
+  font-style: italic;
 }
-
-  .startSubheading{
-    font-size: 1.8em;
-    color: #b40b0b;
-    font-weight: normal;
-    margin-top: 10px;
-    letter-spacing: 1px;
-    text-transform: none;
-    font-family: 'Times New Roman', Times, serif;
-    font-style: italic;
-  }
 
 /* Role Options */
+/* Role Options Container */
 .roleOptions {
-    display: flex;
-    flex-direction: column;
-    margin-left: 85px;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: linear-gradient(135deg, #ffffff, #c1bebe);
+  padding: 20px 25px;
+  border-radius: 15px;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.041);
+  margin: 0 auto 30px;
+  width: 280px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+/* Hover effect */
+.roleOptions:hover {
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+/* Adding subtle transition for the individual labels */
+.roleLabel {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  transition: color 0.3s ease-in-out;
+}
+
+.roleLabel input[type="radio"]:checked + span {
+  color: #790606;
+}
+
+/* On hover, change the label text color */
+.roleLabel:hover {
+  color: #880808;
+}
+
+.roleLabel input[type="radio"] {
+  margin-right: 10px;
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
+
+.roleLabel input[type="radio"]:checked {
+  background-color: #790b0b;
 }
 
 /* Each Role Label */
 .roleLabel {
-    font-size: 1.2em;
-    margin: 10px 0;
-    cursor: pointer;
-    color: #333;
-    display: flex;
-    align-items: center;
+  font-size: 1.2em;
+  margin: 10px 0;
+  cursor: pointer;
+  color: #333;
+  display: flex;
+  align-items: center;
 }
 
 /* Custom Radio Button Styling */
 .roleLabel input {
-    appearance: none; /* Hide default radio button */
-    width: 20px;
-    height: 20px;
-    border: 2px solid #c0392b; /* Red border */
-    border-radius: 50%;
-    display: inline-block;
-    position: relative;
-    margin-right: 10px;
-    cursor: pointer;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #c0392b;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 /* Custom Checked State */
 .roleLabel input:checked {
-    background-color: #c0392b; /* Red background when checked */
-    border: 5px solid white; /* White inner border */
-    box-shadow: 0px 0px 5px rgba(192, 57, 43, 0.6);
+  background-color: #c0392b;
+  border: 5px solid white;
+  box-shadow: 0px 0px 5px rgba(192, 57, 43, 0.6);
 }
 
 /* Next Button */
 .nextButton {
-    background: linear-gradient(145deg, #6f2d2d, #c0392b);
-    color: white;
-    padding: 15px 30px;
-    font-size: 1.2em;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease-in-out;
-    margin-top: 10px;
-    font-weight: 500;
+  background: linear-gradient(145deg, #6f2d2d, #c0392b);
+  color: white;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  margin-top: 10px;
+  font-weight: 500;
 }
 
 .nextButton:hover {
-    background: linear-gradient(145deg, #c0392b, #e74c3c);
-    transform: scale(1.05);
-    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(145deg, #c0392b, #e74c3c);
+  transform: scale(1.05);
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .nextButton:active {
-    transform: scale(1.03);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transform: scale(1.03);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-
-
-
+/* Popup Overlay */
 .popupOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .popupBox {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 300px;
-  }
-  
-  .popupTitle {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .popupInput {
-    width: 100%;
-    padding: 8px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .popupButtons {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .popupConfirm {
-    background: #28a745;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .popupCancel {
-    background: #dc3545;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .popupConfirm:hover {
-    background: #218838;
-  }
-  
-  .popupCancel:hover {
-    background: #c82333;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* backdrop-filter: blur(5px); */
+}
+
+/* Popup Box */
+.popupBox {
+  background: linear-gradient(145deg, #ffffff, #f8e6e6);
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  width: 350px;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Close Button */
+.popupClose {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #c0392b;
+  color: white;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.popupClose:hover {
+  background: #9e192d;
+  transform: scale(1.1);
+}
+
+/* Popup Title */
+.popupTitle {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #9e192d;
+  font-weight: bold;
+  font-family: "Times New Roman", Times, serif;
+}
+
+/* Popup Input */
+.popupInput {
+  width: 95%;
+  padding: 12px;
+  margin: 14px 0;
+  border: 2px solid #c0392b;
+  border-radius: 8px;
+  outline: none;
+  font-size: 16px;
+  transition: border 0.3s ease-in-out;
+}
+
+.popupInput:focus {
+  border-color: #9e192d;
+}
+
+/* Popup Buttons */
+.popupButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+/* Popup Confirm Button */
+.popupConfirm {
+  background: linear-gradient(145deg, #6f2d2d, #c0392b);
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.popupConfirm:hover {
+  background: linear-gradient(145deg, #9e192d, #e74c3c);
+  transform: scale(1.05);
+}
+
+/* Popup Cancel Button */
+.popupCancel {
+  background: linear-gradient(145deg, #c0392b, #e74c3c);
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.popupCancel:hover {
+  background: linear-gradient(145deg, #e74c3c, #ff6b6b);
+  transform: scale(1.05);
+}
