@@ -1,5 +1,6 @@
 # Backend Node modules
 node_modules/
+uploads/
 
 # Backend build output
 dist/
