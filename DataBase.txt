@@ -2,18 +2,21 @@
 ------------------------------------------------------------------------------------------------------------------
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  full_name VARCHAR(100) NOT NULL,
-  username VARCHAR(50) NOT NULL UNIQUE,
-  email VARCHAR(100) NOT NULL UNIQUE,
-  national_id VARCHAR(20) NOT NULL,
-  passport VARCHAR(20),
-  mobile_no VARCHAR(15) NOT NULL,
-  address TEXT NOT NULL,
+  full_name VARCHAR(255) NOT NULL,
+  username VARCHAR(255) NOT NULL UNIQUE,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  national_id VARCHAR(50) NOT NULL,
+  passport VARCHAR(50) DEFAULT NULL,
+  mobile VARCHAR(20) NOT NULL,
   password VARCHAR(255) NOT NULL,
-  role ENUM('public', 'police', 'admin') NOT NULL,
+  role ENUM('public', 'admin', 'other') DEFAULT 'public',
+  address VARCHAR(255) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
+
+
 
 
                       report table

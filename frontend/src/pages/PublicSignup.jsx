@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Signup.css";
 
-const SignupForm = () => {
+const PublicSignup = () => {
   const [formData, setFormData] = useState({
     full_name: "",
     username: "",
@@ -83,7 +83,7 @@ const SignupForm = () => {
   
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/signup",
+        "http://localhost:5000/public-admin/signup",
         userData,
         {
           headers: { "Content-Type": "application/json" },
@@ -92,8 +92,8 @@ const SignupForm = () => {
       );
   
       if (response.status === 201) {
-        setSuccess("Account created successfully! Redirecting...");
-        setTimeout(() => navigate("/login"), 2000);
+        setSuccess("Account created successfully!");
+        setTimeout(() => navigate("/"), 2000);
       }
     } catch (err) {
       setError(
@@ -257,4 +257,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default PublicSignup;

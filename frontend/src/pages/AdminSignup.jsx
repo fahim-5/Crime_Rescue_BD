@@ -83,7 +83,7 @@ const AdminSignup = () => {
   
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/signup",
+        "http://localhost:5000/public-admin/signup",
         userData,
         {
           headers: { "Content-Type": "application/json" },
@@ -93,7 +93,7 @@ const AdminSignup = () => {
   
       if (response.status === 201) {
         setSuccess("Account created successfully! Redirecting...");
-        setTimeout(() => navigate("/login"), 2000);
+        setTimeout(() => navigate("/"), 2000);
       }
     } catch (err) {
       setError(

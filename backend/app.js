@@ -20,7 +20,7 @@ app.use(morgan("dev")); // Logging requests
 app.use("/uploads", express.static("uploads"));  // Static file serving for uploaded files
 
 // Routes
-app.use("/api/auth", authRoutes);   // Authentication routes
+app.use("/public-admin/", authRoutes);   // Authentication routes
 app.use("/api/reports", reportRoutes);  // Crime report routes (upload middleware is applied in reportRoutes.js)
 
 // Error Handling Middleware

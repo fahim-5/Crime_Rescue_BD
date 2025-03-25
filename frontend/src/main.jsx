@@ -5,6 +5,13 @@ import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+
+
+{/* my name is FaHeadSideMask.i am clone repo */}
+   
+
     <App />
   </StrictMode>,
 )
+
+

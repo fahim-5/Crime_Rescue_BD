@@ -21,6 +21,7 @@ import Validations from "./pages/admin/Validations";
 import Start from "./pages/Start";
 import PoliceSignup from "./pages/PoliceSignup";
 import AdminSignup from "./pages/AdminSignup";
+import PublicSignup from "./pages/PublicSignup";
 // import PoliceAlerts from "./pages/admin/PoliceAlerts";
 // import Analytics from "./pages/admin/Analytics";
 // import AdminSettings from "./pages/admin/AdminSettings";
@@ -36,7 +37,7 @@ function App() {
         <Route path="/start" element={<Start />} />
         <Route path="/police-signup" element={<PoliceSignup />} />
         <Route path="/admin-signup" element={<AdminSignup />} />
-        <Route path="/public-signup" element={<PoliceSignup />} />
+        <Route path="/public-signup" element={<PublicSignup />} />
         
 
 

@@ -26,7 +26,7 @@ const LoginForm = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login", // Adjust your backend API URL here
+        "http://localhost:5000/public-admin/login", // Adjust your backend API URL here
         {
           email: credentials.email,
           password: credentials.password,

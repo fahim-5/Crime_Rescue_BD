@@ -1,92 +1,78 @@
-const UserModel = require("../models/userModel"); // Changed to import the class
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const UserModel = require("../models/userModel");
 
-exports.registerUser = async (req, res) => {
-  try {
-    // Changed from createUser() to create()
-    const newUser = await UserModel.create(req.body);
-    
-    res.status(201).json({
-      success: true,
-      message: "User registered successfully",
-      user: newUser // Changed from result.user to newUser
-    });
+const loginMiddleware = async (req, res, next) => {
+  const { email, password } = req.body;
 
-  } catch (error) {
-    if (error.errors) {
-      return res.status(error.status || 400).json({
-        success: false,
-        message: "Registration failed",
-        errors: error.errors
-      });
-    }
-    
-    res.status(error.status || 500).json({
-      success: false,
-      message: error.message || "Registration failed",
-      error: process.env.NODE_ENV === 'development' ? error : undefined
-    });
+  if (!email || !password) {
+    return res.status(400).json({ message: "Email and password are required!" });
   }
-};
-
-
-
-exports.loginUser = async (req, res) => {
-  const { email, password, role } = req.body;
 
   try {
-    // 1. Find user by email
+    // Find user by email (Including Password)
     const user = await UserModel.findByEmail(email);
-    if (!user) {
-      return res.status(401).json({
-        success: false,
-        message: "Invalid credentials"
-      });
+    
+    if (!user || !user.password) {
+      return res.status(404).json({ message: "Invalid credentials." });
     }
 
-    // 2. Verify role
-    if (user.role !== role.toLowerCase()) {
-      return res.status(403).json({
-        success: false,
-        message: "Access denied for this role"
-      });
+    // Compare the provided password with the hashed password
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(400).json({ message: "Invalid credentials." });
     }
 
-    // 3. Verify password
-    const isMatch = await UserModel.comparePassword(password, user.password);
-    if (!isMatch) {
-      return res.status(401).json({
-        success: false,
-        message: "Invalid credentials"
-      });
-    }
-
-    // 4. Generate JWT token
+    // Generate JWT Token
     const token = jwt.sign(
-      { userId: user.id, role: user.role },
+      { userId: user.id, email: user.email, role: user.role },
       process.env.JWT_SECRET,
-      { expiresIn: '24h' }
+      { expiresIn: "1h" }
     );
 
-    // 5. Return success response
-    res.status(200).json({
-      success: true,
-      message: "Login successful",
-      token,
-      user: {
-        id: user.id,
-        email: user.email,
-        role: user.role
-      }
-    });
+    req.token = token; // Store token for further use
+    req.user = { id: user.id, email: user.email, role: user.role };
+
+    next(); // Proceed to the next handler
 
   } catch (error) {
-    console.error("Login error:", error);
-    res.status(500).json({
-      success: false,
-      message: "Login failed",
-      error: process.env.NODE_ENV === 'development' ? error.message : undefined
-    });
+    console.error("Login Error:", error);
+    return res.status(500).json({ message: "Server error. Please try again." });
   }
 };
 
+// Logout Middleware
+const logoutMiddleware = (req, res) => {
+  try {
+    res.clearCookie("token");
+    res.status(200).json({ message: "Logout successful!" });
+  } catch (error) {
+    console.error("Logout Error:", error);
+    return res.status(500).json({ message: "Server error. Please try again." });
+  }
+};
+
+
+
+const registerUser = async (req, res) => {
+  try {
+    // Your registration logic
+    res.status(201).json({ message: "User registered successfully" });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const loginUser = async (req, res) => {
+  try {
+    // Your login logic
+    res.status(200).json({ message: "Login successful" });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
+
+
+module.exports = { loginMiddleware, logoutMiddleware ,registerUser, loginUser };
