@@ -91,13 +91,75 @@ const registerUser = async (req, res) => {
   }
 };
 
+
+
 const loginUser = async (req, res) => {
+  const { email, password, role } = req.body;
+
   try {
-    // Your login logic
-    res.status(200).json({ message: "Login successful" });
+    // Validate required fields
+    if (!email || !password || !role) {
+      return res.status(400).json({ 
+        success: false,
+        message: "Email, password and role are required" 
+      });
+    }
+
+    // Find user by email
+    const user = await UserModel.findByEmail(email);
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid credentials"
+      });
+    }
+
+    // Verify role matches
+    if (user.role !== role) {
+      return res.status(403).json({
+        success: false,
+        message: "Access denied for this role"
+      });
+    }
+
+    // Verify password
+    const isMatch = await UserModel.comparePassword(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid credentials"
+      });
+    }
+
+    // Generate token
+    const token = jwt.sign(
+      { userId: user.id, email: user.email, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: '8h' }
+    );
+
+    // Return success response
+    res.status(200).json({
+      success: true,
+      message: "Login successful",
+      token,
+      user: {
+        id: user.id,
+        email: user.email,
+        role: user.role,
+        username: user.username
+      }
+    });
+
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    console.error('Login error:', error);
+    res.status(500).json({
+      success: false,
+      message: "Internal server error"
+    });
   }
 };
+
+
 
 module.exports = { registerUser, loginUser };

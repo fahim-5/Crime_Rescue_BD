@@ -11,10 +11,21 @@ router.post(
     body("username").trim().notEmpty().withMessage("Username is required"),
     body("email").isEmail().withMessage("Invalid email").normalizeEmail(),
     body("password").isLength({ min: 8 }).withMessage("Password must be at least 8 characters"),
-    // Add other validations as needed
   ],
   validateRequest,
   authController.registerUser
+);
+
+
+
+router.post("/login", 
+  [
+    body("email").isEmail().normalizeEmail(),
+    body("password").exists(),
+    body("role").isIn(["public", "police", "admin"])
+  ],
+  validateRequest,
+  authController.loginUser
 );
 
 

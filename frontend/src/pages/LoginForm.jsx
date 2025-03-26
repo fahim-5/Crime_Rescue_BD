@@ -18,44 +18,51 @@ const LoginForm = () => {
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-
+    setError("");
+    setSuccess("");
+  
     if (!credentials.email || !credentials.password || !credentials.role) {
       setError("All fields are required.");
       return;
     }
-
+  
     try {
       const response = await axios.post(
-        "http://localhost:5000/public-admin/login", // Adjust your backend API URL here
+        "http://localhost:5000/public-admin/login",
         {
-          email: credentials.email,
+          email: credentials.email.toLowerCase().trim(),
           password: credentials.password,
-          role: credentials.role, // Send the role to backend for validation
+          role: credentials.role,
         },
         {
           headers: { "Content-Type": "application/json" },
+          withCredentials: true,
         }
       );
-
-      if (response.status === 200) {
-        const { user, token } = response.data;
-        login({ token, ...user }); // Set the user and token in context/state
-
+  
+      if (response.data.success) {
+        const { token, user } = response.data;
+        login({ token, ...user }); // Update auth context
         setSuccess("Login successful! Redirecting...");
-
-        // Redirect based on user role
+  
+        // Role-based redirection
         setTimeout(() => {
-          if (user?.role === "admin") {
-            navigate("/admin-dashboard");
-          } else if (user?.role === "police") {
-            navigate("/police-dashboard");
-          } else {
-            navigate("/home"); // Default route for public users
+          switch(user.role) {
+            case 'admin':
+              navigate('/admin-dashboard');
+              break;
+            case 'police':
+              navigate('/police-dashboard');
+              break;
+            default:
+              navigate('/home');
           }
-        }, 2000);
+        }, 1500);
       }
     } catch (err) {
-      setError(err.response?.data?.message || "Invalid email or password.");
+      const errorMessage = err.response?.data?.message || 
+                          "Login failed. Please check your credentials.";
+      setError(errorMessage);
     }
   };
 

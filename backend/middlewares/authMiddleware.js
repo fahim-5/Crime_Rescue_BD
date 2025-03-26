@@ -47,6 +47,8 @@ const loginMiddleware = async (req, res, next) => {
   }
 };
 
+module.exports = loginMiddleware ;
+
 
 const logoutMiddleware = (req, res) => {
   try {
@@ -64,5 +66,3 @@ const logoutMiddleware = (req, res) => {
 };
 
 module.exports = logoutMiddleware;
-
-module.exports = loginMiddleware;
