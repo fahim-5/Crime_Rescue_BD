@@ -61,12 +61,10 @@ const NavbarAdmin = () => {
         <nav>
           <ul className="nav-links">
             <li><Link to="/admin/dashboard">Dashboard</Link></li>
-            <li><Link to="/admin/users">User Management</Link></li>
-            <li><Link to="/admin/reports">Crime Reports</Link></li>
+            <li><Link to="/admin/reports">Reports</Link></li>
             <li><Link to="/admin/validations">Validations</Link></li>
-            <li><Link to="/admin/police-alerts">Police Alerts</Link></li>
             <li><Link to="/admin/analytics">Analytics</Link></li>
-            <li><Link to="/admin/settings">Settings</Link></li>
+            <li><Link to="/admin/settings">Profile & Security</Link></li>
           </ul>
         </nav>
 
