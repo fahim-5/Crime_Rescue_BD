@@ -17,5 +17,7 @@ router.post(
   requestController.registerUser
 );
 
+router.get("/requests", requestController.getAllPoliceRequests)
+
 
 module.exports = router;

@@ -259,7 +259,7 @@ const PoliceSignup = () => {
           <input type="hidden" name="role" value="police" />
 
           <button type="submit" className="auth-signup-button">
-            Sign Up
+          Apply for Registration
           </button>
         </form>
 

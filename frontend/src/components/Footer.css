@@ -5,11 +5,20 @@ footer {
     padding: 20px 10px;
     font-size: 0.85rem;
     text-align: center;
-    position: relative;
     box-sizing: border-box;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-top: auto; /* This pushes the footer to the bottom */
+    width: 100%;
 }
 
+/* Add this to your main layout container */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Rest of your existing footer styles */
 .footer-content {
     display: flex;
     justify-content: space-between;
@@ -21,13 +30,14 @@ footer {
     flex: 1;
     padding: 10px;
     margin: 5px;
+    min-width: 200px;
 }
 
 .footer-section h2 {
     font-size: 1.1em;
     margin-bottom: 8px;
     font-weight: bold;
-    color: #e91e63; /* Highlight heading */
+    color: #e91e63;
 }
 
 .footer-section p,
@@ -74,10 +84,10 @@ footer {
 
 .footer-section .social-icon i:hover {
     transform: scale(1.1);
-    color: #e91e63; /* Change color on hover */
+    color: #e91e63;
 }
 
-/* Footer bottom (small text section) */
+/* Footer bottom */
 .footer-bottom {
     border-top: 1px solid #444;
     padding: 5px 0;

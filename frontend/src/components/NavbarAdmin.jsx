@@ -55,7 +55,7 @@ const NavbarAdmin = () => {
     <header>
       <div className="navbar">
         <Link to="/admin/dashboard">
-          <h1 className="logo">Stop Crime - Admin</h1>
+          <h1 className="logo">Stop Crime.</h1>
         </Link>
 
         <nav>

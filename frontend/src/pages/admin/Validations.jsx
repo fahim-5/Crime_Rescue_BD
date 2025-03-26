@@ -1,75 +1,117 @@
-import React, { useState } from "react";
-import "./Validations.css"; 
+// Validations.jsx
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./Validations.css";
 
 const Validations = () => {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [selectedPolice, setSelectedPolice] = useState(null);
+  const [requests, setRequests] = useState([]);
+  const [selectedRequest, setSelectedRequest] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  // Sample data for demonstration, replace with actual data from API or state
-  const policeRequests = [
-    { name: "John Doe", badgeId: "PD12345", department: "Dhaka Metropolitan", email: "john.doe@example.com" },
-    { name: "Jane Smith", badgeId: "PD67890", department: "Chittagong", email: "jane.smith@example.com" },
-  ];
+  // Fetch pending police requests
+  useEffect(() => {
+    const fetchRequests = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/police/requests");
+        // If you keep the backend response structure, use:
+        // setRequests(response.data.data); 
+        // After fixing the backend to return direct array:
+        setRequests(response.data);
+      } catch (err) {
+        setError("Failed to fetch requests");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchRequests();
+  }, []);
 
-  const openPopup = (police) => {
-    setSelectedPolice(police);
-    setIsPopupOpen(true);
+  const handleApprove = async (id) => {
+    try {
+      await axios.patch(`http://localhost:5000/police/requests/${id}`, { status: "approved" });
+      setRequests(requests.filter((req) => req._id !== id));
+    } catch (err) {
+      setError("Failed to approve request");
+    }
   };
 
-  const closePopup = () => {
-    setIsPopupOpen(false);
-    setSelectedPolice(null);
+  const handleReject = async (id) => {
+    try {
+      await axios.patch(`http://localhost:5000/police/requests/${id}`, { status: "rejected" });
+      setRequests(requests.filter((req) => req._id !== id));
+    } catch (err) {
+      setError("Failed to reject request");
+    }
   };
-  
-  
-  const confirmRequest = () => {
-    // Handle the confirmation logic here, e.g., update police status
-    alert(`Request for ${selectedPolice.name} confirmed.`);
-    closePopup();
+
+  const viewDetails = (request) => {
+    setSelectedRequest(request);
   };
+
+  if (loading) return <div className="loading">Loading requests...</div>;
+  if (error) return <div className="error">{error}</div>;
 
   return (
-    <div className="container">
-      <h1>Police Account Requests</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Badge ID</th>
-            <th>Department</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {policeRequests.map((police, index) => (
-            <tr key={index}>
-              <td>{police.name}</td>
-              <td>{police.badgeId}</td>
-              <td>{police.department}</td>
-              <td>
-                <button className="check-btn" onClick={() => openPopup(police)}>
-                  Check
-                </button>
-              </td>
+    <div className="validation-container">
+      <h1>Police Registration Requests</h1>
+      
+      <div className="requests-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Police ID</th>
+              <th>Station</th>
+              <th>Rank</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {requests.map((request) => (
+              <tr key={request._id}>
+                <td>{request.full_name}</td>
+                <td>{request.police_id}</td>
+                <td>{request.station}</td>
+                <td>{request.rank}</td>
+                <td className="actions">
+                  <button className="view-btn" onClick={() => viewDetails(request)}>View</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-      {isPopupOpen && selectedPolice && (
-        <div className="popup">
-          <div className="popup-content">
-            <span className="close-btn" onClick={closePopup}>
-              &times;
-            </span>
-            <h2>Police Details</h2>
-            <p><strong>Name:</strong> {selectedPolice.name}</p>
-            <p><strong>Badge ID:</strong> {selectedPolice.badgeId}</p>
-            <p><strong>Department:</strong> {selectedPolice.department}</p>
-            <p><strong>Email:</strong> {selectedPolice.email}</p>
-            <button className="confirm-btn" onClick={confirmRequest}>
-              Confirm
-            </button>
+      {selectedRequest && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <button className="close-modal" onClick={() => setSelectedRequest(null)}>&times;</button>
+            <h2>Officer Details</h2>
+            <div className="detail-grid">
+              <div className="detail-group">
+                <h3>Identification</h3>
+                <p><strong>Full Name:</strong> {selectedRequest.full_name}</p>
+                <p><strong>Police ID:</strong> {selectedRequest.police_id}</p>
+                <p><strong>Badge Number:</strong> {selectedRequest.badge_number}</p>
+              </div>
+              <div className="detail-group">
+                <h3>Assignment</h3>
+                <p><strong>Station:</strong> {selectedRequest.station}</p>
+                <p><strong>Rank:</strong> {selectedRequest.rank}</p>
+                <p><strong>Joining Date:</strong> {new Date(selectedRequest.joining_date).toLocaleDateString()}</p>
+              </div>
+              <div className="detail-group">
+                <h3>Contact</h3>
+                <p><strong>Email:</strong> {selectedRequest.email}</p>
+                <p><strong>Mobile:</strong> {selectedRequest.mobile}</p>
+              </div>
+            </div>
+            <div className="modal-actions">
+              <button className="approve-btn" onClick={() => { handleApprove(selectedRequest._id); setSelectedRequest(null); }}>Approve</button>
+              <button className="reject-btn" onClick={() => { handleReject(selectedRequest._id); setSelectedRequest(null); }}>Reject</button>
+            </div>
           </div>
         </div>
       )}
@@ -78,3 +120,4 @@ const Validations = () => {
 };
 
 export default Validations;
+

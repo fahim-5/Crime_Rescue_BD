@@ -59,6 +59,34 @@ const requestController = {
       res.status(500).json({ message: "Server error during signup." });
     }
   },
-};
+
+
+getAllPoliceRequests: async (req, res) => {
+  try {
+    const { status, page = 1, limit = 10 } = req.query;
+    
+    const requests = status 
+      ? await RequestModel.getPoliceRequestsByStatus(status)
+      : await RequestModel.getAllPoliceRequests();
+
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+    const paginatedRequests = requests.slice(startIndex, endIndex);
+
+    res.status(200).json(paginatedRequests);
+
+  } catch (error) {
+    console.error('Error in getAllPoliceRequests:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to retrieve police requests',
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+  }
+}
+
+}
 
 module.exports = requestController;
+
+

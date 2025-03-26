@@ -35,6 +35,51 @@ const RequestModel = {
       throw err;
     }
   },
+
+  getAllPoliceRequests: async () => {
+    const query = `
+  SELECT 
+    id as _id,
+    full_name,
+    email,
+    mobile,
+    police_id,
+    badge_number,
+    rank,
+    station,
+    joining_date,
+    status,
+    created_at
+  FROM requests
+  WHERE role = 'police'
+  ORDER BY created_at DESC
+`;
+    try {
+      const [requests] = await pool.execute(query);
+      return requests;
+    } catch (err) {
+      console.error("Database Error:", err.sqlMessage || err);
+      throw err;
+    }
+  },
+
+  getPoliceRequestsByStatus: async (status) => {
+    const query = `
+      SELECT 
+        id, full_name, police_id, rank, station, status
+      FROM requests
+      WHERE role = 'police' AND status = ?
+      ORDER BY created_at DESC
+    `;
+
+    try {
+      const [requests] = await pool.execute(query, [status]);
+      return requests;
+    } catch (err) {
+      console.error("Database Error:", err.sqlMessage || err);
+      throw err;
+    }
+  },
 };
 
 module.exports = RequestModel;
