@@ -1,59 +1,68 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const db = require("../config/db"); // Ensure db is properly required
+const UserModel = require("../models/userModel");
 
-// Middleware for handling login logic
 const loginMiddleware = async (req, res, next) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ message: "Email and password are required!" });
-  }
-
   try {
-    // Check if the user exists with the provided email
-    const [user] = await db.execute(
-      "SELECT * FROM users WHERE email = ?",
-      [email]
+    const { email, password } = req.body;
+
+    // Validate input fields
+    if (!email || !password) {
+      return res.status(400).json({ message: "Email and password are required!" });
+    }
+
+    // Find user by email
+    const user = await UserModel.findByEmail(email);
+    if (!user) {
+      return res.status(401).json({ message: "Invalid credentials." });
+    }
+
+    // Check if the user has a stored password
+    if (!user.password) {
+      return res.status(401).json({ message: "Invalid credentials." });
+    }
+
+    // Compare the provided password with the stored hashed password
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Invalid credentials." });
+    }
+
+    // Generate JWT Token with a secure expiration time
+    const token = jwt.sign(
+      { userId: user.id, email: user.email, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: "2h" } // Increased expiration time for better usability
     );
 
-    if (user.length === 0) {
-      return res.status(404).json({ message: "User not found." });
-    }
+    // Store user data in request for further use
+    req.token = token;
+    req.user = { id: user.id, email: user.email, role: user.role };
 
-    // Compare the provided password with the hashed password stored in the database
-    const isPasswordValid = await bcrypt.compare(password, user[0].password);
-    if (!isPasswordValid) {
-      return res.status(400).json({ message: "Invalid credentials." });
-    }
+    next(); // Proceed to the next middleware or controller
 
-    // If the credentials are valid, create a JWT token for the user
-    const token = jwt.sign({ userId: user[0].id, username: user[0].username }, process.env.JWT_SECRET, { expiresIn: "1h" });
-
-    // Store token in response or set it in cookies (for session management)
-    req.token = token; // Store the token for the next middleware/route handler
-
-    // You could also use a session or cookie instead of sending the token here if needed
-    next(); // Proceed to the actual login route handler
   } catch (error) {
     console.error("Login Error:", error);
     return res.status(500).json({ message: "Server error. Please try again." });
   }
 };
 
-// Middleware for handling logout logic
-const logoutMiddleware = (req, res, next) => {
-  try {
-    // Clear user session or token (If using JWT token in cookies)
-    res.clearCookie("token"); // If you're storing JWT in cookies
-    // If you're using session, you can do:
-    // req.session.destroy();
 
-    res.status(200).json({ message: "Logout successful!" });
+const logoutMiddleware = (req, res) => {
+  try {
+    // Clear the JWT Token (if stored in cookies, localStorage, or sessionStorage)
+    res.clearCookie('token');  // If you store the token as a cookie
+
+    // Alternatively, you can manage blacklisting of tokens on the server side using Redis or a database
+
+    // Return a response indicating the user has been logged out
+    res.status(200).json({ message: "Logged out successfully." });
   } catch (error) {
     console.error("Logout Error:", error);
-    return res.status(500).json({ message: "Server error. Please try again." });
+    res.status(500).json({ message: "An error occurred during logout." });
   }
 };
 
-module.exports = { loginMiddleware, logoutMiddleware };
+module.exports = logoutMiddleware;
+
+module.exports = loginMiddleware;

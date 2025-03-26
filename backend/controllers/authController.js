@@ -2,64 +2,92 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/userModel");
 
-const loginMiddleware = async (req, res, next) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ message: "Email and password are required!" });
-  }
-
-  try {
-    // Find user by email (Including Password)
-    const user = await UserModel.findByEmail(email);
-    
-    if (!user || !user.password) {
-      return res.status(404).json({ message: "Invalid credentials." });
-    }
-
-    // Compare the provided password with the hashed password
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-      return res.status(400).json({ message: "Invalid credentials." });
-    }
-
-    // Generate JWT Token
-    const token = jwt.sign(
-      { userId: user.id, email: user.email, role: user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-    );
-
-    req.token = token; // Store token for further use
-    req.user = { id: user.id, email: user.email, role: user.role };
-
-    next(); // Proceed to the next handler
-
-  } catch (error) {
-    console.error("Login Error:", error);
-    return res.status(500).json({ message: "Server error. Please try again." });
-  }
-};
-
-// Logout Middleware
-const logoutMiddleware = (req, res) => {
-  try {
-    res.clearCookie("token");
-    res.status(200).json({ message: "Logout successful!" });
-  } catch (error) {
-    console.error("Logout Error:", error);
-    return res.status(500).json({ message: "Server error. Please try again." });
-  }
-};
-
-
-
 const registerUser = async (req, res) => {
   try {
-    // Your registration logic
-    res.status(201).json({ message: "User registered successfully" });
+    const { 
+      full_name, 
+      username, 
+      email, 
+      national_id, 
+      mobile_no,  // Changed from mobile to mobile_no
+      password, 
+      confirmPassword, 
+      address, 
+      role 
+    } = req.body;
+
+    // Validate required fields
+    if (!full_name || !username || !email || !national_id || !mobile_no || 
+        !password || !confirmPassword || !address || !role) {
+      return res.status(400).json({ 
+        message: "All fields are required.",
+        fields: {
+          full_name: !full_name,
+          username: !username,
+          email: !email,
+          national_id: !national_id,
+          mobile_no: !mobile_no,
+          password: !password,
+          confirmPassword: !confirmPassword,
+          address: !address,
+          role: !role
+        }
+      });
+    }
+
+    // Validate password match
+    if (password !== confirmPassword) {
+      return res.status(400).json({ message: "Passwords do not match." });
+    }
+
+    // Validate address format
+    const addressPattern = /^[a-zA-Z\s]+-[a-zA-Z\s]+$/;
+    if (!addressPattern.test(address)) {
+      return res.status(400).json({
+        message: "Enter a valid address in the format: District-Thana (e.g., Dhaka-Mirpur).",
+      });
+    }
+
+    // Validate role
+    const validRoles = ["public", "police", "admin"];
+    if (!validRoles.includes(role)) {
+      return res.status(400).json({ 
+        message: "Invalid role. Choose from: public, police, admin." 
+      });
+    }
+
+    // Prepare data for model
+    const userData = {
+      full_name,
+      username,
+      email,
+      national_id,
+      mobile: mobile_no, // Map to mobile for model
+      password,
+      address,
+      role
+    };
+
+    const newUser = await UserModel.create(userData);
+
+    res.status(201).json({ 
+      message: "User registered successfully.", 
+      user: {
+        id: newUser.id,
+        username: newUser.username,
+        email: newUser.email,
+        role: newUser.role
+      }
+    });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    console.error("Registration Error:", error);
+    const status = error.status || 500;
+    const message = error.message || "Server error during registration.";
+    res.status(status).json({ 
+      message,
+      errors: error.errors,
+      details: error.details
+    });
   }
 };
 
@@ -72,7 +100,4 @@ const loginUser = async (req, res) => {
   }
 };
 
-
-
-
-module.exports = { loginMiddleware, logoutMiddleware ,registerUser, loginUser };
+module.exports = { registerUser, loginUser };

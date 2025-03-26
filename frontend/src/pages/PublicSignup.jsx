@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./Signup.css";
+import "./Signup.css"; // Using the same CSS file as SignupForm
 
 const PublicSignup = () => {
   const [formData, setFormData] = useState({
@@ -10,11 +10,11 @@ const PublicSignup = () => {
     email: "",
     national_id: "",
     passport: "",
-    mobile: "", // Added mobile number field
+    mobile: "",
     password: "",
     confirmPassword: "",
     role: "public",
-    address: "", // Add address to formData
+    address: "",
   });
 
   const [error, setError] = useState("");
@@ -23,82 +23,77 @@ const PublicSignup = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-  
-    let newValue = value.trim();
-    if (name === "full_name") {
-      newValue = value.replace(/\s+/g, " "); // Allow spaces within
-    } else if (name === "email" || name === "username") {
-      newValue = value.trim().toLowerCase(); // Trim & normalize
-    }
-  
+    // Don't trim password fields
+    const newValue = (name === 'password' || name === 'confirmPassword') 
+      ? value 
+      : value.trim();
     setFormData({ ...formData, [name]: newValue });
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setSuccess("");
-  
-    // Ensure all required fields are filled
-    if (
-      !formData.full_name ||
-      !formData.username ||
-      !formData.email ||
-      !formData.national_id ||
-      !formData.password ||
-      !formData.confirmPassword ||
-      !formData.mobile ||
-      !formData.address // Ensure address (Thana) is filled
-    ) {
+
+    // Validate required fields
+    if (!formData.full_name || !formData.username || !formData.email || 
+        !formData.national_id || !formData.mobile || !formData.password || 
+        !formData.confirmPassword || !formData.address) {
       setError("All fields are required.");
       return;
     }
-  
-    // Validate Address Format (District-Thana)
-    const addressPattern = /^[a-zA-Z\s]+-[a-zA-Z\s]+$/;
-    if (!addressPattern.test(formData.address)) {
-      setError("Enter a valid address in the format: District-Thana (e.g., Dhaka-Mirpur).");
-      return;
-    }
-  
-    // Password match validation
+
+    // Validate password match
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match.");
       return;
     }
-  
-    // Send cleaned data for non-police roles
-    const userData = {
-      full_name: formData.full_name,
-      username: formData.username,
-      email: formData.email,
-      national_id: formData.national_id,
-      mobile: formData.mobile, // Include mobile number
-      passport: formData.passport || null, // Store null if empty
-      password: formData.password,
-      role: formData.role,
-      address: formData.address,
-    };
-  
+
+    // Validate password strength
+    if (formData.password.length < 8) {
+      setError("Password must be at least 8 characters.");
+      return;
+    }
+
+    // Validate address format
+    if (!/^[a-zA-Z\s]+-[a-zA-Z\s]+$/.test(formData.address)) {
+      setError("Address must be in format: District-Thana (e.g., Dhaka-Mirpur).");
+      return;
+    }
+
     try {
       const response = await axios.post(
         "http://localhost:5000/public-admin/signup",
-        userData,
+        {
+          full_name: formData.full_name.trim(),
+          username: formData.username.trim().toLowerCase(),
+          email: formData.email.trim().toLowerCase(),
+          national_id: formData.national_id.trim(),
+          mobile_no: formData.mobile.trim(), // Correct field name for backend
+          address: formData.address.trim(),
+          password: formData.password, // No trim
+          confirmPassword: formData.confirmPassword, // No trim
+          role: "public",
+          ...(formData.passport && { passport: formData.passport.trim() })
+        },
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       );
-  
+
       if (response.status === 201) {
-        setSuccess("Account created successfully!");
+        setSuccess("Account created successfully! Redirecting...");
         setTimeout(() => navigate("/"), 2000);
       }
     } catch (err) {
+      console.error("Registration error:", err.response?.data);
       setError(
-        err.response?.data?.message || "An error occurred while signing up."
+        err.response?.data?.message || 
+        err.response?.data?.error || 
+        "Registration failed. Please try again."
       );
+      setTimeout(() => setError(""), 5000);
     }
   };
   
@@ -106,18 +101,15 @@ const PublicSignup = () => {
     <main className="auth-signup-container">
       <section className="auth-signup-box">
         <h2 className="auth-signup-title">Create Your Account</h2>
-        <h3 className="auth-signup-indication">As a civilian</h3>
+        <h3 className="auth-signup-indication">As a Civilian</h3>
         {error && <p className="auth-error-message">{error}</p>}
         {success && <p className="auth-success-message">{success}</p>}
 
         <form onSubmit={handleSubmit} className="auth-signup-form">
           <div className="auth-left">
-            <label htmlFor="full_name" className="auth-label">
-              Full Name
-            </label>
+            <label className="auth-label">Full Name</label>
             <input
               type="text"
-              id="full_name"
               name="full_name"
               className="auth-input"
               placeholder="Enter your full name"
@@ -126,12 +118,9 @@ const PublicSignup = () => {
               required
             />
 
-            <label htmlFor="username" className="auth-label">
-              Username
-            </label>
+            <label className="auth-label">Username</label>
             <input
               type="text"
-              id="username"
               name="username"
               className="auth-input"
               placeholder="Choose a username"
@@ -140,12 +129,9 @@ const PublicSignup = () => {
               required
             />
 
-            <label htmlFor="email" className="auth-label">
-              Email
-            </label>
+            <label className="auth-label">Email</label>
             <input
               type="email"
-              id="email"
               name="email"
               className="auth-input"
               placeholder="Enter your email"
@@ -154,12 +140,9 @@ const PublicSignup = () => {
               required
             />
 
-            <label htmlFor="national_id" className="auth-label">
-              National ID
-            </label>
+            <label className="auth-label">National ID</label>
             <input
               type="text"
-              id="national_id"
               name="national_id"
               className="auth-input"
               placeholder="Enter your National ID"
@@ -168,12 +151,9 @@ const PublicSignup = () => {
               required
             />
 
-            <label htmlFor="mobile" className="auth-label">
-              Mobile Number
-            </label>
+            <label className="auth-label">Mobile Number</label>
             <input
               type="text"
-              id="mobile"
               name="mobile"
               className="auth-input"
               placeholder="Enter your mobile number"
@@ -181,29 +161,28 @@ const PublicSignup = () => {
               onChange={handleChange}
               required
             />
+
+           
           </div>
 
           <div className="auth-right">
-            <label htmlFor="address" className="auth-label">
-              Present Address (District-Thana)
-            </label>
+
+          
+            
+          <label className="auth-label">Address (District-Thana)</label>
             <input
               type="text"
-              id="address"
               name="address"
               className="auth-input"
-              placeholder="Enter your Thana"
+              placeholder="Enter your address (e.g., Dhaka-Mirpur)"
               value={formData.address}
               onChange={handleChange}
               required
             />
 
-            <label htmlFor="passport" className="auth-label">
-              Passport (Optional)
-            </label>
+            <label className="auth-label">Passport (Optional)</label>
             <input
               type="text"
-              id="passport"
               name="passport"
               className="auth-input"
               placeholder="Enter your passport number (if applicable)"
@@ -211,12 +190,13 @@ const PublicSignup = () => {
               onChange={handleChange}
             />
 
-            <label htmlFor="password" className="auth-label">
-              Password
-            </label>
+            
+
+            
+
+            <label className="auth-label">Password</label>
             <input
               type="password"
-              id="password"
               name="password"
               className="auth-input"
               placeholder="Create a password"
@@ -225,12 +205,9 @@ const PublicSignup = () => {
               required
             />
 
-            <label htmlFor="confirmPassword" className="auth-label">
-              Confirm Password
-            </label>
+            <label className="auth-label">Confirm Password</label>
             <input
               type="password"
-              id="confirmPassword"
               name="confirmPassword"
               className="auth-input"
               placeholder="Confirm your password"
@@ -238,12 +215,12 @@ const PublicSignup = () => {
               onChange={handleChange}
               required
             />
-
-            <input type="hidden" name="role" value="public" />
           </div>
 
+          <input type="hidden" name="role" value="public" />
+
           <button type="submit" className="auth-signup-button">
-            SignUp
+            Sign Up
           </button>
         </form>
 
