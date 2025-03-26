@@ -20,7 +20,8 @@ const Validations = () => {
     setIsPopupOpen(false);
     setSelectedPolice(null);
   };
-
+  
+  
   const confirmRequest = () => {
     // Handle the confirmation logic here, e.g., update police status
     alert(`Request for ${selectedPolice.name} confirmed.`);

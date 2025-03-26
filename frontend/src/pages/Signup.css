@@ -25,12 +25,19 @@
   font-size: 2rem;
   font-weight: 600;
   color: #9e192d;  
-  margin-bottom: 10px;
+  font-family: 'Times New Roman', Times, serif;
+  background: linear-gradient(145deg, #ffffff, #f5f3f3);
+  padding: 10px 15px;
+  border-radius: 6px;
+  /* display: inline-block; */
   letter-spacing: 1px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
 }
 
 .auth-signup-indication{
-  color: #c45061;
+  color: #b33d4f;
+  font-style: oblique;
 }
 
 /* Form Layout - Keeps it Flexible */
@@ -82,7 +89,7 @@
 .auth-signup-button {
   width: 100%;
   padding: 14px;
-  background: linear-gradient(135deg, #e94560, #ff6b81);
+  background: linear-gradient(145deg, #6f2d2d, #c0392b);
   color: #ffffff;
   margin-top: 15px;
   margin-left: 215px;

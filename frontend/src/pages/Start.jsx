@@ -151,7 +151,7 @@ const Start = () => {
             <h3 className={styles.popupTitle}>Admin Verification</h3>
             
             <div className={styles.inputGroup}>
-              <label>Email</label>
+              <label className={styles.popupleavel}>Email</label>
               <input
                 type="email"
                 className={styles.popupInput}
@@ -162,7 +162,7 @@ const Start = () => {
             </div>
             
             <div className={styles.inputGroup}>
-              <label>Password</label>
+              <label className={styles.popupleavel}>Password</label>
               <input
                 type="password"
                 className={styles.popupInput}
@@ -200,7 +200,7 @@ const Start = () => {
             </p>
             
             <div className={styles.inputGroup}>
-              <label>Verification Code</label>
+              <label className={styles.verfications}>Verification Code</label>
               <input
                 type="text"
                 className={styles.popupInput}

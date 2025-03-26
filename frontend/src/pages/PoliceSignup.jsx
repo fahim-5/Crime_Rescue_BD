@@ -15,6 +15,7 @@ const PoliceSignup = () => {
     confirmPassword: "",
     role: "police",
     address: "",
+    police_id: "",
     badge_number: "",
     rank: "",
     station: "",
@@ -47,7 +48,8 @@ const PoliceSignup = () => {
       !formData.badge_number ||
       !formData.rank ||
       !formData.station ||
-      !formData.joining_date
+      !formData.joining_date||
+      !formData.police_id
     ) {
       setError("All fields are required.");
       return;
@@ -70,7 +72,7 @@ const PoliceSignup = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/signup",
+        "http://localhost:5000/police/requests",
         formData,
         {
           headers: { "Content-Type": "application/json" },
@@ -80,7 +82,7 @@ const PoliceSignup = () => {
 
       if (response.status === 201) {
         setSuccess("Account created successfully! Redirecting...");
-        setTimeout(() => navigate("/login"), 2000);
+        setTimeout(() => navigate("/"), 2000);
       }
     } catch (err) {
       setError(
@@ -177,6 +179,17 @@ const PoliceSignup = () => {
           </div>
 
           <div className="auth-right">
+
+          <label className="auth-label">Enter Police ID</label>
+            <input
+              type="text"
+              name="police_id"
+              className="auth-input"
+              placeholder="Enter your poilce ID"
+              value={formData.police_id}
+              onChange={handleChange}
+              required
+            />
             <label className="auth-label">Badge Number</label>
             <input
               type="text"
